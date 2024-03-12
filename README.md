@@ -26,7 +26,6 @@ The idea of this project is to create a web application that can be used as a ma
 
 - People with vehicles visiting unfamiliar locations.
 - Individuals in a situation where there is insufficient parking at the event.
-- People with unused parking spaces seeking to generate income.
 - People with parking spaces which are not effectively in use  (garages, driveways) looking to generate income.
 
 ## Tech Stack
