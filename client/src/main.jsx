@@ -6,14 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 import ProviderContext from "./context/ProviderContext.jsx";
 
 const root = createRoot(document.getElementById('root'));
-
+console.log(import.meta.env.VITE_DOMAIN)
+// console.log(import.meta.env.VITE_CLIENT_ID)
 root.render(
 <BrowserRouter>
 <ProviderContext>
 
 <Auth0Provider
-    domain="dev-adw6l8hr7034diri.us.auth0.com"
-    clientId="mU7GiKXbt87Yd4rSOT59ARPSxiB02Fq0"
+    domain={import.meta.env.VITE_DOMAIN}
+    clientId={import.meta.env.VITE_CLIENT_ID}
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
