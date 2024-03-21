@@ -2,8 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../components/HomePage";
 import Navbar from "../components/Navbar";
-// import Navbar from "../components/Navbar";
-// import Navbar from '../components/Navbar';
 
 const AllRoutes = () => {
   return (
