@@ -6,8 +6,8 @@ import Home from "../components/Home";
 
 const AllRoutes = () => {
   return (
-    <div>
-      <Routes>
+    <div className="">
+       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/nav" element={<Navbar />} /> */}
       </Routes>
