@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <AllRoutes />
-      <LoginButton />
+      <LoginButton /> 
       <LogoutButton />
       <Profile />
     </>
