@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import HomePage from "./HomePage";
-// import HomePage from './components/HomePage'
 
 function Home() {
   const [count, setCount] = useState(0);
@@ -9,12 +8,15 @@ function Home() {
   return (
     <>
       <div className="bg-gradient-to-b from-sky-500 to-indigo-500 font-sans">
-        <div className="flex">
-          <div className="w-1/5 h-full">
+        {/* Main container for layout */}
+        <div className="flex h-screen">  {/* Set height to full viewport */}
+          <div className="w-1/5 h-full sticky top-0 left-0 overflow-y-auto">
+            {/* Sticky side navigation */}
             <Navbar />
           </div>
 
-          <div className="w-4/5 bg-inherit">
+          <div className=" bg-inherit overflow-y-auto pt-4 pl-4">
+            {/* Main content with padding and scrollbar */}
             <HomePage />
           </div>
         </div>
