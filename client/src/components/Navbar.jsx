@@ -1,10 +1,14 @@
 import React from 'react'
-import { GrHomeRounded } from "react-icons/gr";
-import { PiGarageLight } from "react-icons/pi";
-import { PiHourglassThin } from "react-icons/pi";
-import { IoWalletOutline } from "react-icons/io5";
+import { GoHome } from "react-icons/go";
+import { PiGarage } from "react-icons/pi";
+import { PiHourglassHigh } from "react-icons/pi";
+import { BiWallet } from "react-icons/bi";
+import Login from "../loginComponents/Login";
+import Logout from "../loginComponents/Logout";
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth0();
   return (
     <div className=''>
 
@@ -15,8 +19,8 @@ const Navbar = () => {
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md ">
         <div className='flex justify-between  items-center w-auto'>
-
-      <GrHomeRounded  className='mr-3' />
+      {/* <img className='mr-3'  src={icon1}/> */}
+      <GoHome size={"20px"}  className='mr-3' />
       Home
         </div>
 </button>
@@ -24,7 +28,8 @@ const Navbar = () => {
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
       <div className='flex justify-between  items-center'>
-      <PiGarageLight  className='mr-3' />
+      {/* <img className='mr-3'  src={icon2}/> */}
+      <PiGarage size={"20px"}  className='mr-3'/>
       Garage
   </div>
 </button>
@@ -34,7 +39,8 @@ const Navbar = () => {
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
       <div className='flex justify-between  items-center'>
-    <PiHourglassThin  className='mr-3'/>
+      {/* <img className='mr-3'  src={icon3}/> */}
+      <PiHourglassHigh size={"20px"} className='mr-3'/>
     History
   </div>
 </button>
@@ -42,12 +48,20 @@ const Navbar = () => {
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
       <div className='flex justify-between  items-center'>
-        <IoWalletOutline  className='mr-3' />
+      {/* <img className='mr-3'  src={icon4}/> */}
+      <BiWallet size={"18px"}  className='mr-3'/>
         Wallet
       </div>
 </button>
     </li>
+    <li>
+      <div className='flex justify-center'>
+
+    {isAuthenticated ? <Logout /> : <Login /> }
+      </  div>
+    </li>
   </ul>
+   
 </div>
     </div>
   )
