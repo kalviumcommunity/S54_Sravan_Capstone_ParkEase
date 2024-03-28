@@ -11,7 +11,7 @@ const getSpace = async (req, res) => {
         }
         res.status(200).json(space);
     } catch (err) {
-        console.error(err);
+        console.error('Error getting space:', err.message);
         res.status(500).json({ err: 'Internal Server Error' });
     }
 }
