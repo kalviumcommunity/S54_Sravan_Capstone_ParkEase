@@ -33,7 +33,7 @@ const HomePage = () => {
               return (
 
         <div className='w-48 h-68 px-5 pt-8  borderShad mr-10 my-5' key={elem.id}>
-          <img src={elem.image} className='rounded-lg h-28' alt="" />
+          <img src={park1} className='rounded-lg h-28' alt="" />
           <h1 className='font-semibold py-0.5 ml-1'>{elem.name} </h1>
           <button className='bg-blue-500 my-4 hover:bg-blue-700 text-white font-semibold py-1 w-36 rounded-full border-none'>Park</button>
         </div>
