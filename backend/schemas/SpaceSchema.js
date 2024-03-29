@@ -29,6 +29,10 @@ const ParkingSpaceSchema = new mongoose.Schema({
   available: {
     type: Boolean,
     default: true
+  },
+  image: {
+    type: [String],
+    default: ["https://parkez.vercel.app/assets/Park1-B8zUMOCE.jpg"] 
   }
 });
 
