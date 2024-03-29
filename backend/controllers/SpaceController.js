@@ -1,5 +1,33 @@
 const Spaces = require('../schemas/SpaceSchema')
 
+const createSpace = async (req, res) => {
+  try {
+   
+    const { provider_id, address, location, hourly_rate , description , image , available } = req.body;
+    if (!provider_id || !address || !location || !hourly_rate) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const newSpace = new Spaces({
+        provider_id,
+        address,
+        location,
+        hourly_rate,
+        description,
+        image,
+        available
+      });
+
+    // Save the space to the database
+    const savedSpace = await newSpace.save();
+    res.status(201).json({ message: 'Parking space created successfully', space: savedSpace });
+
+  } catch (error) {
+    console.error('Error in  creating space:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
 const getSpace = async (req, res) => {
     const { id } = req.params
 
@@ -28,4 +56,4 @@ const getAllSpaces = async (req, res) => {
     }
 };
 
-module.exports = { getSpace , getAllSpaces }
+module.exports = { getSpace , getAllSpaces , createSpace }
