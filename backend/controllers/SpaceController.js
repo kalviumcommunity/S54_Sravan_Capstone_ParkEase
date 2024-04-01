@@ -56,4 +56,28 @@ const getAllSpaces = async (req, res) => {
     }
 };
 
-module.exports = { getSpace , getAllSpaces , createSpace }
+const updateSpace = async (req , res) => {
+    const  { id } = req.params
+    const updates = req.body;
+    if (!id) {
+        return res.status(400).json({ message: 'Missing space ID' });
+    }
+
+    try {
+        // Find the space by ID
+        const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // Set `new: true` to return the updated document
+    
+        // Check if space exists
+        if (!space) {
+          return res.status(404).json({ message: 'Space Not Found' });
+        }
+    
+        res.status(200).json({ message: 'Space updated successfully', space });
+      }
+   catch (error) {
+        console.error('Error updating space:', error.stack);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+module.exports = { getSpace , getAllSpaces , createSpace , updateSpace }
