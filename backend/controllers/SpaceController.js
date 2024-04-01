@@ -75,7 +75,7 @@ const updateSpace = async (req , res) => {
         res.status(200).json({ message: 'Space updated successfully', space });
       }
    catch (error) {
-        console.error('Error updating space:', error.message);
+        console.error('Error updating space:', error.stack);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }

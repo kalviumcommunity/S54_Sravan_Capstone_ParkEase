@@ -6,5 +6,5 @@ const { getSpace , getAllSpaces , createSpace , updateSpace } = require("../cont
 router.get("/all", getAllSpaces)
 router.get("/:id", getSpace)
 router.post("/", createSpace)
-router.put("/:id",updateSpace)
+router.put("/:id", updateSpace)
 module.exports = router
