@@ -2,7 +2,6 @@ const Spaces = require('../schemas/SpaceSchema')
 
 const createSpace = async (req, res) => {
   try {
-   
     const { provider_id, address, location, hourly_rate , description , image , available } = req.body;
     if (!provider_id || !address || !location || !hourly_rate) {
       return res.status(400).json({ message: 'Missing required fields' });
@@ -64,10 +63,10 @@ const updateSpace = async (req , res) => {
     }
 
     try {
-        // Find the space by ID
-        const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // Set `new: true` to return the updated document
+
+        const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // setting `new: true` to return the updated document
     
-        // Check if space exists
+        // checking if space exists
         if (!space) {
           return res.status(404).json({ message: 'Space Not Found' });
         }
