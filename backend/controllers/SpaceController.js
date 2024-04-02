@@ -66,7 +66,6 @@ const updateSpace = async (req , res) => {
 
         const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // setting `new: true` to return the updated document
     
-        // checking if space exists
         if (!space) {
           return res.status(404).json({ message: 'Space Not Found' });
         }
