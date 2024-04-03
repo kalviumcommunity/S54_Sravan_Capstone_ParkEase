@@ -3,7 +3,14 @@ const app = express();
 const cors = require('cors');
 
 require('dotenv').config()
-app.use(cors());
+app.use(cors(
+  {
+    origin: ['https://parkez.vercel.app','http://localhost:5173', 'https://parkease-six.vercel.app'],
+    methods: 'GET, POST, PUT, DELETE',
+    allowedHeaders: 'Content-Type',
+    credentials: true,
+  }
+));
 app.use(express.json());
 
 // Error Handling Middleware 
