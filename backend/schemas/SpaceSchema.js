@@ -4,7 +4,7 @@ const ParkingSpaceSchema = new mongoose.Schema({
   provider_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users', 
-    required: true
+    required: true,
   },
   address: {
     type: String,

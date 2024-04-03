@@ -3,6 +3,7 @@ import { GoHome } from "react-icons/go";
 import { PiGarage } from "react-icons/pi";
 import { PiHourglassHigh } from "react-icons/pi";
 import { BiWallet } from "react-icons/bi";
+import logo from "../assets/altlogo.png"
 import Login from "../loginComponents/Login";
 import Logout from "../loginComponents/Logout";
 import { useAuth0 } from '@auth0/auth0-react';
@@ -14,7 +15,7 @@ const Navbar = () => {
 
         <div className="h-screen bg-inherit  w-full flex flex-col justify-around items-center">
   {/* <p className="text-white text-xl font-bold mb-16"></p> */}
-
+    <img src={logo} className='' alt="" />
   <ul className="flex flex-col space-y-8 ">
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md ">

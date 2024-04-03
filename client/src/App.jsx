@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import AllRoutes from './routes/AllRoutes'
+import AddSpace from './components/AddSpace'
 
 
 function App() {
@@ -9,7 +10,6 @@ function App() {
   return (
     <>
       <AllRoutes />
-    
     </>
   )
 }
