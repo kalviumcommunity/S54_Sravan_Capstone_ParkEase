@@ -15,7 +15,7 @@ function Home() {
             <Navbar />
           </div>
 
-          <div className=" bg-inherit overflow-y-auto pt-4 pl-4">
+          <div className="w-4/5 bg-inherit overflow-y-auto pt-4 pl-4">
             {/* Main content with padding and scrollbar */}
             <HomePage />
           </div>
