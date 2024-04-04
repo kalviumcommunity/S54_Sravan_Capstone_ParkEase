@@ -14,7 +14,7 @@ const AddSpace = () => {
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log(position.coords.latitude);
                 console.log(position.coords.longitude);
-                setCoordinates({ longitude: Number(position.coords.longitude.toFixed(2)),latitude : Number(position.coords.latitude.toFixed(2)) });
+                setCoordinates({ longitude: Number(position.coords.longitude),latitude : Number(position.coords.latitude) });
             });
         }
     };
