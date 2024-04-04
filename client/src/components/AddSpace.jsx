@@ -14,7 +14,7 @@ const AddSpace = () => {
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log(position.coords.latitude);
                 console.log(position.coords.longitude);
-                setCoordinates({ longitude: position.coords.longitude, latitude: position.coords.latitude });
+                setCoordinates({ longitude: Number(position.coords.longitude.toFixed(2)),latitude : Number(position.coords.latitude.toFixed(2)) });
             });
         }
     };
@@ -38,6 +38,7 @@ const AddSpace = () => {
     };
 
     const onSubmit = async (data) => {
+        data.hourly_rate = Number(data.hourly_rate);
         console.log(data)
         try {
             // Upload image and get image URL
@@ -45,15 +46,17 @@ const AddSpace = () => {
             console.log(data)
             // Send POST request with form data
             const response = await axios.post('https://parkez-server.vercel.app/spaces', {
+            // const response = await axios.post('http://localhost:3003/spaces/', {
                 ...data,
-                image: imageUrl,
+                image: [imageUrl],
+                provider_id : '65edda314aa9d8555e3dc09e',
                 location: {
-                    type: 'Point',
-                    coordinates: [parseFloat(coordinates.longitude), parseFloat(coordinates.latitude)]
+                    coordinates: [coordinates.longitude, coordinates.latitude]
                 }
             });
 
             console.log(response.data);
+            window.location.reload()
         } catch (error) {
             console.error(error);
         }
@@ -98,7 +101,7 @@ const AddSpace = () => {
                                     </div>
                                     <div className="col-span-2 sm:col-span-1">
                                         <label htmlFor="price" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                                        <input type="number" name="price" id="price" className={inputStyles} placeholder="" {...register('price', { required: true })} />
+                                        <input type="number" name="price" id="price" className={inputStyles} placeholder="" {...register('hourly_rate', { required: true })} />
                                     </div>
                                     <div className="col-span-2 sm:col-span-1">
                                         <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -107,11 +110,11 @@ const AddSpace = () => {
                                     </div>
                                     <div className="col-span-2">
                                         <label htmlFor="longitude" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Longitude</label>
-                                        <input type="number" name="longitude" id="longitude" className={inputStyles} placeholder="Longitude" value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })} {...register('longitude', { required: true })} />
+                                        <input type="number" name="longitude" id="longitude" className={inputStyles} placeholder="Longitude" value={coordinates.longitude} onChange={(e) => setCoordinates({ ...coordinates, longitude: e.target.value })}  />
                                     </div>
                                     <div className="col-span-2">
                                         <label htmlFor="latitude" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Latitude</label>
-                                        <input type="number" name="latitude" id="latitude" className={inputStyles} placeholder="Latitude" value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} {...register('latitude', { required: true })} />
+                                        <input type="number" name="latitude" id="latitude" className={inputStyles} placeholder="Latitude" value={coordinates.latitude} onChange={(e) => setCoordinates({ ...coordinates, latitude: e.target.value })} />
                                     </div>
                                     <div className="col-span-2">
                                         <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Description</label>

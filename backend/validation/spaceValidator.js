@@ -9,7 +9,7 @@ const spaceSchema = Joi.object({
   hourly_rate: Joi.number().required().min(0.01).precision(2).max(1000), //  with 2 decimal places
   description: Joi.string().optional().trim().allow(""), // its Optional &  can be empty
   image: Joi.array().items(Joi.string().uri()).min(1).max(5),
-  available: Joi.boolean().required(), 
+  available: Joi.boolean(), 
 });
 
 
