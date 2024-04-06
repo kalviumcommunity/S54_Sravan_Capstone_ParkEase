@@ -5,9 +5,9 @@
 }
 
 
-/* body{
-    
-} */
+body{
+   overflow-x: none; 
+}
 
 ::-webkit-scrollbar{
     display: none;
