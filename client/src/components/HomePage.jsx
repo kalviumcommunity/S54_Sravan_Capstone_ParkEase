@@ -14,6 +14,7 @@ const HomePage = () => {
 
   // function to handle scrolling
   const handleScroll = () => {
+    if (cardsContainerRef.current) {
     // the width of a single card
     const cardWidth = 48 + 2 * 2 + 5 * 2; // width + horizontal margins + padding
     // distance to scroll
@@ -24,6 +25,7 @@ const HomePage = () => {
       left: scrollDistance,
       behavior: 'smooth' 
     });
+  }
   };
 
   useEffect(()=>{
@@ -84,7 +86,7 @@ const HomePage = () => {
           }
           </div>
           {/* scroll button  */}
-          <img src={img}  className='size-20  relative  top-20 -translate-x-8' alt="" onClick={handleScroll} />
+          <img src={img}  className='size-20  relative  top-20 -translate-x-8' alt="carouselbtn" onClick={handleScroll} />
 
         </div>
 
