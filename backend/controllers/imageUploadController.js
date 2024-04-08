@@ -19,7 +19,7 @@ const uploadFile = async (req, res, err) => {
     } catch (error) {
       console.error(error);
       fs.unlinkSync(req.file.path);
-      return null;
+      res.status(500).json({message : "Error occurred while uploading the file"});
     }
 };
 console.log(uploadFile, "uploadfile");
