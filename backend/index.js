@@ -40,4 +40,6 @@ app.get('/', (req, res) => {
 });
 
 const SpacesRouter = require("./routes/Spaces")
+const fileUploadRouter = require("./routes/FileUpload");
 app.use('/spaces', SpacesRouter);
+app.use("/api/fileupload", fileUploadRouter);
