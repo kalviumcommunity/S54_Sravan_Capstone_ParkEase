@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 import { BiUser } from "react-icons/bi";
 import AddSpace from './AddSpace';
+import FileUpload from './FileUpload';
 
 const HomePage = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -58,8 +59,8 @@ const HomePage = () => {
         <div className='bg-white  rounded-tl-3xl'> 
         <div className=' pt-10 pl-12 pr-6'>
 
+        <FileUpload />
         <div className='flex justify-between'>
-
         <div>
         <p  className='text-2xl font-bold' >Recently Parked</p >
         <p className='text-xs text-gray-400'>List of Recently Parked</p>

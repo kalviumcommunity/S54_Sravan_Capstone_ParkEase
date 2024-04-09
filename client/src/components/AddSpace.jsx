@@ -19,31 +19,13 @@ const AddSpace = () => {
         }
     };
 
-    const imageUpload = async () => {
-        const formData = new FormData();
-        formData.append('file', Imagepath);
-        formData.append('upload_preset', 'image_upload');
-
-        try {
-            const response = await axios.post('https://api.cloudinary.com/v1_1/djiigiq9w/image/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            
-            return response.data.secure_url; // Return the image URL
-        } catch (error) {
-            console.error(error);
-        }
-    };
 
     const onSubmit = async (data) => {
         data.hourly_rate = Number(data.hourly_rate);
         console.log(data)
         try {
-            // Upload image and get image URL
-            const imageUrl = await imageUpload();
-            console.log(data)
+            // const imageUrl = 
+            console.log(data) 
             // Send POST request with form data
             const response = await axios.post('https://parkez-server.vercel.app/spaces', {
             // const response = await axios.post('http://localhost:3003/spaces/', {

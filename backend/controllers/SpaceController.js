@@ -1,4 +1,6 @@
-const Spaces = require('../schemas/SpaceSchema')
+const cloudinary = require('../utils/clodinaryConfig');
+const Spaces = require('../schemas/SpaceSchema');
+const upload = require('../middleware/multerSetup');
 
 const createSpace = async (req, res) => {
   try {
@@ -25,7 +27,8 @@ const createSpace = async (req, res) => {
     console.error('Error in  creating space:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-};
+}; 
+
 
 const getSpace = async (req, res) => {
     const { id } = req.params
