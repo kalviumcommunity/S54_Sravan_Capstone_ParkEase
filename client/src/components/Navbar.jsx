@@ -7,11 +7,13 @@ import logo from "../assets/altlogo.png"
 import Login from "../loginComponents/Login";
 import Logout from "../loginComponents/Logout";
 import { useAuth0 } from '@auth0/auth0-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
   return (
-    <div className=''>
+    <>
+    <div className='hidden md:block'>
 
         <div className="h-screen bg-inherit  w-full flex flex-col justify-around items-center">
   {/* <p className="text-white text-xl font-bold mb-16"></p> */}
@@ -65,6 +67,29 @@ const Navbar = () => {
    
 </div>
     </div>
+    <div className='h-10 bg-inherit bg-white w-full fixed flex justify-around items-center bottom-0 z-50 md:hidden '>
+        <div className='sm:flex text-xs'>
+          <Link to={'/'}>
+          <GoHome size={"20px"}  className='m-auto' />Home
+          </Link>
+          </div>
+        <div className='sm:flex text-xs'>
+          <Link to={"/test"}>
+            <PiGarage size={"20px"}  className='m-auto' />Garage
+          </Link>
+          </div>
+        <div className='sm:flex text-xs'>
+          <Link to={"/his"}>
+          <PiHourglassHigh size={"20px"}  className='m-auto' />History
+          </Link>
+          </div>
+        <div className='sm:flex text-xs'  >
+         <Link to={'/profile'}>
+          <BiWallet size={"20px"}  className='m-auto' />Wallet
+         </Link>
+          </div>
+    </div>
+    </>
   )
 }
 
