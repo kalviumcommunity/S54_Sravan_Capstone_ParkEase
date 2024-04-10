@@ -99,7 +99,7 @@ const HomePage = () => {
                     <img
                       src={elem.image[0]}
                       className="rounded-lg my-2 h-28"
-                      alt=""
+                      alt="parking Space"
                     />
                     <p className="text-xs ">{elem.description}</p>
                     <button className="bg-blue-500 mt-2 hover:bg-blue-700 text-white font-semibold py-1 w-36 rounded-full border-none">
@@ -127,7 +127,7 @@ const HomePage = () => {
                   className="w-48 h-68 px-5 pt-8  borderShad mr-10 my-5"
                   key={elem._id}
                 >
-                  <img src={park1} className="rounded-lg h-28" alt="" />
+                  <img src={park1} className="rounded-lg h-28" alt="parkingspace" />
   
                   <button className="bg-blue-500 my-4 hover:bg-blue-700 text-white font-semibold py-1 w-36 rounded-full border-none">
                     Park
