@@ -10,9 +10,8 @@ const uploadFile = async (req, res, err) => {
     }
 
     
-    // const images = req.files
-    const images = req.body.images
-    // console.log(req.body.images)
+    const images = req.files
+
     const imageUrls = []
     for (const image of images){
       const result = await cloudinary.uploader.upload(image.path, {
@@ -26,7 +25,9 @@ const uploadFile = async (req, res, err) => {
 
     } catch (error) {
       console.error(error);
-      // fs.unlinkSync(.path);
+      req.files.forEach((file) => {
+        fs.unlinkSync(file.path);
+      });
       res.status(500).send(`Internal Error at uploading the file - ${error}`);
     }
 };
