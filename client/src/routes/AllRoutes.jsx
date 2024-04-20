@@ -13,7 +13,7 @@ const AllRoutes = () => {
        <Routes>
         {/* <Route path="/" element={<HomePage />} /> */}
         {/* <Route path="/" element={<Test />} /> */}
-        <Route path="/test" element={<FileUpload />} />
+        <Route path="/garage" element={<FileUpload />} />
         <Route path="/his" element={<Test />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

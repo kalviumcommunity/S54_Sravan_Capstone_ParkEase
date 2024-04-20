@@ -29,10 +29,11 @@ const Navbar = () => {
     </li>
     <li>
       <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
+      <Link to={"/garage"} style={{textDecoration : "none"}}>
       <div className='flex justify-between  items-center'>
-      <PiGarage size={"20px"}  className='mr-3'/>
-      Garage
+            <PiGarage size={"20px"}  className='mr-3' />Garage
   </div>
+      </Link>
 </button>
      
 

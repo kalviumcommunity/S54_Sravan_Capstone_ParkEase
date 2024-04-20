@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
 import HomePage from "./HomePage";
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 function Home() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+
       <div className="bg-gradient-to-b from-sky-500 to-indigo-500 font-sans">
         {/* Main container for layout */}
         <div className="flex h-screen">  {/* Set height to full viewport */}
@@ -17,11 +18,14 @@ function Home() {
 
           <div className="w-full md:w-4/5 bg-inherit overflow-y-auto pt-4 pl-4">
             {/* Main content with padding and scrollbar */}
-            <HomePage />
+            <SkeletonTheme baseColor="#1e90ff" highlightColor="#00ffff" >
+              <HomePage />
+            </SkeletonTheme>
           </div>
         </div>
       </div>
-    </>
+    
+
   );
 }
 
