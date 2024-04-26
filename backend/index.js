@@ -35,7 +35,7 @@ connectToMongoDB().then(()=>{
 })
 
 app.get('/', (req, res) => {
-  res.send('Welcome to ParkEaz!');
+  res.send('Welcome to ParkEz!');
 });
 
 const SpacesRouter = require("./routes/Spaces")

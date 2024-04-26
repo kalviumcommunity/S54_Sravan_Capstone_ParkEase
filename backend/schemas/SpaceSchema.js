@@ -1,43 +1,32 @@
 const mongoose = require('mongoose');
 
-const ParkingSpaceSchema = new mongoose.Schema({
-  provider_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users', 
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true
-  },
+const parkingSpaceSchema = new mongoose.Schema({
   location: {
-    type: {
-      type: String,   // GeoJSON Point type
-    },
-    coordinates: [
-      { type: Number, required: true }, // for Longitude
-      { type: Number, required: true }  // for Latitude
-    ]
+    latitude: { type: Number, required: true },
+    longitude: { type: Number, required: true },
+    address: { type: String, required: true }
   },
-  hourly_rate: {
-    type: Number,
-    required: true
+  availability: { type: String, enum: ['available', 'occupied'], default: 'available' },
+  capacity: { type: Number, required: true },
+  price: {
+    hourly: { type: Number, required: true },
+    daily: { type: Number, required: true },
+    monthly: { type: Number, required: true }
   },
-  description: {
-    type: String
+  features: [{ type: String }],
+  owner: {
+    name: { type: String, required: true },
+    contact: { type: String, required: true }
   },
-  available: {
-    type: Boolean,
-    default: true
-  },
-  image: {
-    type: String,
-    default: "https://parkez.vercel.app/assets/Park1-B8zUMOCE.jpg" 
-  }
+  image : [{ type: String }],
+  rating: { type: Number, default: 0 },
+  reviews: [{
+    user: { type: String },
+    rating: { type: Number },
+    comment: { type: String }
+  }]
 });
 
-ParkingSpaceSchema.index({ location: "2dsphere" });
+const ParkingSpace = mongoose.model('ParkingSpace', parkingSpaceSchema);
 
-const Spaces = mongoose.model('spaces', ParkingSpaceSchema);
-
-module.exports = Spaces;
+module.exports = ParkingSpace;
