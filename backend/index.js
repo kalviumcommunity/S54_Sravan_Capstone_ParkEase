@@ -9,14 +9,13 @@ app.use(cors(
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type',
     credentials: true,
-  }
+  }    
 ));
 app.use(express.json());
 
 // Error Handling Middleware 
 app.use((err, req, res, next) => {
   console.error(err.stack); 
-
   
   res.status(err.statusCode || 500).send({
     error: {

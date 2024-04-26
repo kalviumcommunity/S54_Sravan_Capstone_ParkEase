@@ -1,92 +1,103 @@
-import React from 'react'
-import { GoHome } from "react-icons/go";
-import { PiGarage } from "react-icons/pi";
-import { PiHourglassHigh } from "react-icons/pi";
-import { BiWallet } from "react-icons/bi";
-import logo from "../assets/altlogo.png"
-import Login from "../loginComponents/Login";
-import Logout from "../loginComponents/Logout";
-import { useAuth0 } from '@auth0/auth0-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  SignedIn,
+  SignedOut,
+  SignIn,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { isAuthenticated } = useAuth0();
   return (
-    <>
-    <div className='hidden md:block'>
-
-        <div className="h-screen bg-inherit  w-full flex flex-col justify-around items-center">
-  {/* <p className="text-white text-xl font-bold mb-16"></p> */}
-    <img src={logo} className='' alt="parkeaselogo" />
-  <ul className="flex flex-col space-y-8 ">
-    <li>
-      <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md ">
-        <div className='flex justify-between  items-center w-auto'>
-      <GoHome size={"20px"}  className='mr-3' />
-      Home
+    <div>
+      <div className="navbar glass text-blue font-semibold my-4 rounded-lg z-20 w-11/12 mx-[4%] fixed top-0 left-0 right-0">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a className="">Home</a>
+              </li>
+              {/* <li>
+          <a>Parent</a>
+          <ul className="p-2">
+            <li><a>Submenu 1</a></li>
+            <li><a>Submenu 2</a></li>
+          </ul>
+        </li> */}
+              <li>
+                <a>Explore</a>
+              </li>
+              <li>
+                <a>About US</a>
+              </li>
+            </ul>
+          </div>
+          <a className="btn btn-ghost text-xl">PARKEZ</a>
         </div>
-</button>
-    </li>
-    <li>
-      <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
-      <div className='flex justify-between  items-center'>
-      <PiGarage size={"20px"}  className='mr-3'/>
-      Garage
-  </div>
-</button>
-     
+        <div className="navbar-center hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <Link to={'/'}>
+              <a>Home</a>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/explore"}>
+              <a>Explore </a>
+              </Link>
+            </li>
+            <li>
+              <a>About US </a>
+            </li>
+          </ul>
+        </div>
+        <div className="navbar-end">
+          <SignedOut>
 
-    </li>
-    <li>
-      <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
-      <div className='flex justify-between  items-center'>
-      <PiHourglassHigh size={"20px"} className='mr-3'/>
-    History
-  </div>
-</button>
-    </li>
-    <li>
-      <button className="text-white w-full hover:text-blue-300 hover:bg-white  px-16 py-2 rounded-md">
-      <div className='flex justify-between  items-center'>
-      <BiWallet size={"18px"}  className='mr-3'/>
-        Wallet
+          <button
+            className="btn btn-info"
+            onClick={() => document.getElementById("my_modal_2").showModal()}
+            >
+            Sign In
+          </button>
+            </SignedOut>
+          <SignedIn>
+          <div className="avatar online">
+            <UserButton className=""/>
+          </div>
+          </SignedIn>
+          <dialog id="my_modal_2" className="modal flex-col items-start">
+          <SignedOut>
+            <SignIn className="border-none" />
+      </SignedOut>
+            <form method="dialog" className="modal-backdrop text-white ">
+              <button>close</button>
+            </form>
+          </dialog>
+        </div>
       </div>
-</button>
-    </li>
-    <li>
-      <div className='flex justify-center'>
-
-    {isAuthenticated ? <Logout /> : <Login /> }
-      </  div>
-    </li>
-  </ul>
-   
-</div>
     </div>
-    <div className='h-10 bg-inherit bg-white w-full fixed flex justify-around items-center bottom-0 z-50 md:hidden '>
-        <div className='sm:flex text-xs'>
-          <Link to={'/'}>
-          <GoHome size={"20px"}  className='m-auto' />Home
-          </Link>
-          </div>
-        <div className='sm:flex text-xs'>
-          <Link to={"/test"}>
-            <PiGarage size={"20px"}  className='m-auto' />Garage
-          </Link>
-          </div>
-        <div className='sm:flex text-xs'>
-          <Link to={"/his"}>
-          <PiHourglassHigh size={"20px"}  className='m-auto' />History
-          </Link>
-          </div>
-        <div className='sm:flex text-xs'  >
-         <Link to={'/profile'}>
-          <BiWallet size={"20px"}  className='m-auto' />Wallet
-         </Link>
-          </div>
-    </div>
-    </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
