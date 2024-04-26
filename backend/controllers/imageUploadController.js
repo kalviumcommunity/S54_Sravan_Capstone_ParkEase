@@ -9,7 +9,7 @@ const uploadFile = async (req, res, err) => {
       return res.status(400).json({message: 'No file uploaded'});
     }
 
-    
+      console.log(req.files)
     const images = req.files
 
     const imageUrls = []
@@ -17,7 +17,7 @@ const uploadFile = async (req, res, err) => {
       const result = await cloudinary.uploader.upload(image.path, {
         resource_type: "auto"
       });
-      imageUrls.push(result.url)
+      imageUrls.push(result.secure_url)
     }
     req.images = imageUrls
     console.log(imageUrls)

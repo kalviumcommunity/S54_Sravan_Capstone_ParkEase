@@ -1,16 +1,26 @@
 import { useState } from 'react'
 import './App.css'
-import AllRoutes from './routes/AllRoutes'
+import ImageUpload from './ImageUpload'
+// import Bg from './components/Bg'
 import Home from './components/Home'
-import { SkeletonTheme } from 'react-loading-skeleton';
-
+import Navbar from './components/Navbar'
+import Explore from './components/Explore'
+import { Route, Routes, useNavigate } from "react-router-dom";
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-
-      <Home />
-
+    <>
+    <div>
+      {/* <ImageUpload /> */}
+      <Navbar />
+      {/* <Home /> */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/explore' element={<Explore />} />
+      </Routes>
+    </div>
+    </>
   )
 }
 
