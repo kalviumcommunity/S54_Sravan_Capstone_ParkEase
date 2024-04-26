@@ -2,32 +2,39 @@ const cloudinary = require('../utils/clodinaryConfig');
 const Spaces = require('../schemas/SpaceSchema');
 const upload = require('../middleware/multerSetup');
 
+const ParkingSpace = require('../schemas/SpaceSchema');
+
 const createSpace = async (req, res) => {
   try {
-    const { provider_id, address, location, hourly_rate , description , image , available } = req.body;
-    if (!provider_id || !address || !location || !hourly_rate) {
+    const { location, availability, capacity, price, features, owner, rating, reviews, image } = req.body;
+
+    // Validate required fields
+    if (!location || !availability || !price || !owner || !rating || !image || image.length === 0) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const newSpace = new Spaces({
-        provider_id,
-        address,
-        location,
-        hourly_rate,
-        description,
-        image,
-        available
-      });
+    const newSpace = new ParkingSpace({
+      location,
+      availability,
+      capacity,
+      price,
+      features,
+      owner,
+      rating,
+      reviews,
+      image
+    });
 
     // Save the space to the database
     const savedSpace = await newSpace.save();
     res.status(201).json({ message: 'Parking space created successfully', space: savedSpace });
 
   } catch (error) {
-    console.error('Error in  creating space:', error);
+    console.error('Error creating space:', error);
     res.status(500).json({ message: 'Internal Server Error' });
   }
-}; 
+};
+
 
 
 const getSpace = async (req, res) => {
@@ -67,7 +74,7 @@ const updateSpace = async (req , res) => {
 
     try {
 
-        const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // setting `new: true` to return the updated document
+        const space = await Spaces.findByIdAndUpdate(id, updates, { new: true }); // setting new: true to return the updated document
     
         if (!space) {
           return res.status(404).json({ message: 'Space Not Found' });
