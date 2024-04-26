@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { image } = require('../utils/clodinaryConfig');
 
 const parkingSpaceSchema = new mongoose.Schema({
   location: {

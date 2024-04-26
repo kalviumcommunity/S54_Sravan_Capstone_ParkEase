@@ -39,4 +39,7 @@ const bookingSchema = new Schema({
   }
 });
 
+bookingSchema.index({ startTime: 1 });
+bookingSchema.index({ endTime: 1 });
+
 module.exports = mongoose.model('Booking', bookingSchema);
