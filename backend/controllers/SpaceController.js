@@ -31,7 +31,7 @@ const createSpace = async (req, res) => {
 
   } catch (error) {
     console.error('Error creating space:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: 'Failed to create parking space', error: error.message });
   }
 };
 
