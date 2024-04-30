@@ -3,6 +3,7 @@ import { useUser } from '@clerk/clerk-react';
 
 export const AppContext = createContext();
 
+
 const ProviderContext = ({ children }) => {
   const { isSignedIn, user, isLoaded } = useUser(AppContext);
   const [userInfo, setUserInfo] = useState(null);
