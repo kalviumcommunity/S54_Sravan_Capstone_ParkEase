@@ -13,13 +13,14 @@ import icon2 from "../assets/Icon2.svg";
 import icon1 from "../assets/Icon3.svg";
 import pin from "../assets/Pin.svg"
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="">
      
       <div className="hero min-h-screen video-container">
         {/* <div className="hero min-h-screen" style={{backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)'}}> */}
-        <video autoPlay muted loop className="video-background">
+        <video autoPlay muted loop className="hero-overlay object-cover">
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -73,8 +74,8 @@ const Home = () => {
               Provident cupiditate voluptatem et in sdggdbvdo Quaerat.
             </p>
 
-            <div className="md:flex justify-center">
-              <div className="w-80 text-center flex-col justify-center my-8 md:my-0">
+            <div className="md:flex  justify-center">
+              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
                 <img src={icon} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Convenience</h5>
                 <p>
@@ -82,7 +83,7 @@ const Home = () => {
                   Dubai.
                 </p>
               </div>
-              <div className="w-80 text-center flex-col justify-center  my-8 md:my-0">
+              <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
                 <img src={icon1} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Cost-Effective</h5>
                 <p>
@@ -90,7 +91,7 @@ const Home = () => {
                   Dubai.
                 </p>
               </div>
-              <div className="w-80 text-center flex-col justify-center  my-8 md:my-0">
+              <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
                 <img src={icon2} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Community Engagement</h5>
                 <p>
@@ -110,9 +111,8 @@ const Home = () => {
               </p>
             </div>
             <div>
-            <div className="grid grid-cols-3 gap-4 mt-20">
-  {/* First Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-20">
+  <div className="card card-compact  md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
       alt="Shoes"
@@ -138,8 +138,7 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Second Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
       alt="Shoes"
@@ -165,8 +164,7 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Third Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
       alt="Shoes"
@@ -192,8 +190,7 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Fourth Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
       alt="Shoes"
@@ -219,8 +216,7 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Fifth Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
       alt="Shoes"
@@ -246,8 +242,7 @@ const Home = () => {
     </div>
   </div>
 
-  {/* Sixth Card */}
-  <div className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative">
+  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
     <img
       src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
       alt="Shoes"
@@ -273,7 +268,9 @@ const Home = () => {
     </div>
   </div>
 </div>
+<Link to={"/explore"}>
 <button className="btn btn-primary my-8">See All Spaces</button>
+</Link>
 
             </div>
           </div>
@@ -341,7 +338,7 @@ const Home = () => {
       </div>
 
       {/* Footer  */}
-      <div className="px-32 my-28 bg-black">
+      <div className="px-2 md:px-32 my-28 bg-black">
         <footer className="footer items-center p-4 bg-inherit text-white ">
           <aside className="items-center grid-flow-col">
             <p>Copyright © 2024 - All right reserved</p>

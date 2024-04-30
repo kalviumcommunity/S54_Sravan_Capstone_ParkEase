@@ -57,7 +57,6 @@ const Explore = () => {
             </div>
           ))}
         </div>
-        <button className="btn btn-primary my-8">See All Spaces</button>
       </div>
 
       <div className="w-1/8  mt-24 fixed divide-y h-screen shadow-md">
