@@ -40,5 +40,7 @@ app.get('/', (req, res) => {
 
 const SpacesRouter = require("./routes/Spaces")
 const fileUploadRouter = require("./routes/FileUpload");
+const UserRouter = require("./routes/Users")
 app.use('/spaces', SpacesRouter);
 app.use("/api/fileupload", fileUploadRouter);
+app.use('/users',UserRouter)

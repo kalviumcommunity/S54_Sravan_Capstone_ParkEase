@@ -4,8 +4,39 @@ meta {
   seq: 3
 }
 
-post {
-  url: http://localhost:3003/spaces/
-  body: none
+get {
+  url: http://localhost:3003/spaces/662c820f1795a64256316f8a
+  body: json
   auth: none
+}
+
+body:json {
+   {
+          "location": {
+              "latitude": 36.725,
+              "longitude": 73.5792,
+              "address": "Civil Lines, Jalandhar, Punjab"
+          },
+          "price": {
+              "hourly": 300,
+              "daily": 1800,
+              "monthly": 30000
+          },
+          "owner": {
+              "name": "Arun Parking",
+              "contact": "+91-XXXXXXXXXX"
+          },
+          "_id": "662b69d535dc10d69448a2ce",
+          "availability": "available",
+          "capacity": 100,
+          "features": [
+              "covered parking",
+              "security",
+              "valet service"
+          ],
+          "image": ["https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"],
+          "rating": 4.2,
+          "reviews": [],
+          "__v": 0
+      }
 }
