@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Explore from './components/Explore'
 import { Route, Routes, useNavigate } from "react-router-dom";
+
 function App() {
   const [count, setCount] = useState(0)
 

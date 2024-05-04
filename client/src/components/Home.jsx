@@ -11,13 +11,12 @@ import { ImLinkedin2 } from "react-icons/im";
 import icon from "../assets/Icon.svg";
 import icon2 from "../assets/Icon2.svg";
 import icon1 from "../assets/Icon3.svg";
-import pin from "../assets/Pin.svg"
+import pin from "../assets/Pin.svg";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="">
-     
       <div className="hero min-h-screen video-container">
         {/* <div className="hero min-h-screen" style={{backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)'}}> */}
         <video autoPlay muted loop className="hero-overlay object-cover">
@@ -34,7 +33,7 @@ const Home = () => {
                 type="text"
                 placeholder="Type here"
                 className="input input-ghost w-full focus:outline-none focus:border-none focus:rounded-full"
-                />
+              />
               <div className=" join-item rounded-r-full text-black p-3 bg-yellow-400">
                 <CiSearch className="size-6" />
               </div>
@@ -79,25 +78,19 @@ const Home = () => {
                 <img src={icon} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Convenience</h5>
                 <p>
-                  We offer expert legal help for all related property items in
-                  Dubai.
-                </p>
+                  We offer expert legal help for all related property items.</p>
               </div>
               <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
                 <img src={icon1} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Cost-Effective</h5>
                 <p>
-                  We offer expert legal help for all related property items in
-                  Dubai.
-                </p>
+                  We offer expert legal help for all related property items.</p>
               </div>
               <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
                 <img src={icon2} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Community Engagement</h5>
                 <p>
-                  We offer expert legal help for all related property items in
-                  Dubai.
-                </p>
+                  We offer expert legal help for all related property items.</p>
               </div>
             </div>
 
@@ -111,167 +104,178 @@ const Home = () => {
               </p>
             </div>
             <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-20">
-  <div className="card card-compact  md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white">
-      <h2 className="card-title"> Radhika Apartments </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> Model Town, Jalandhar, Punjab,</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 250 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.5</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-20">
+                <div className="card card-compact  md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white">
+                    <h2 className="card-title"> Radhika Apartments </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> Model Town, Jalandhar, Punjab,</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 250 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.5</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
 
-  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
-      <h2 className="card-title"> Shubham Den </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> Civil Lines, Jalandhar, Punjab,</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 300 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.2</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
+                <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
+                    <h2 className="card-title"> Shubham Den </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> Civil Lines, Jalandhar, Punjab,</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 300 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.2</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
 
-  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
-      <h2 className="card-title"> Ayush Residency </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> Industrial Area, Jalandhar, Punjab,</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 200 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.7</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
+                <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
+                    <h2 className="card-title"> Ayush Residency </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> Industrial Area, Jalandhar, Punjab,</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 200 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.7</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
 
-  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
-      <h2 className="card-title"> Rikhil Plaza </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> Nakodar Road, Jalandhar, Punjab,</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 180 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.3</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
+                <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://www.sickchirpse.com/wp-content/uploads/2017/06/Parking-SPace-1.jpg"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
+                    <h2 className="card-title"> Rikhil Plaza </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> Nakodar Road, Jalandhar, Punjab,</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 180 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.3</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
 
-  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
-      <h2 className="card-title"> Mukund Homes </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> PUDA Colony, Jalandhar, Punjab,</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 270 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.6</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
+                <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
+                    <h2 className="card-title"> Mukund Homes </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> PUDA Colony, Jalandhar, Punjab,</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 270 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.6</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
 
-  <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
-    <img
-      src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
-      alt="Shoes"
-      className="size-full rounded-md"
-    />
-    <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
-      <h2 className="card-title"> Janvika Lot </h2>
-      <div className="flex items-center">
-        <div className="flex items-center">
-          <img src={pin} className="size-4 mr-2" alt="" />
-          <p> Guru Teg Bahadur Nagar</p>
-        </div>
-      </div>
-      <div className="flex justify-between">
-        <div>
-          <p className="text-red-500 font-bold">₹ 280 <span className="text-black"> / day</span></p>
-        </div>
-        <div>
-          <p className="font-semibold">⭐ 4.4</p>
-        </div>
-      </div>
-      <div className="card-actions justify-end"></div>
-    </div>
-  </div>
-</div>
-<Link to={"/explore"}>
-<button className="btn btn-primary my-8">See All Spaces</button>
-</Link>
-
+                <div className="card card-compact md:w-96 h-80 bg-base-100 shadow-xl relative">
+                  <img
+                    src="https://th.bing.com/th/id/OIP.qJMjLLMA7-keel7CLfb-4AHaE8?rs=1&pid=ImgDetMain"
+                    alt="Shoes"
+                    className="size-full rounded-md"
+                  />
+                  <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white ">
+                    <h2 className="card-title"> Janvika Lot </h2>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        <img src={pin} className="size-4 mr-2" alt="" />
+                        <p> Guru Teg Bahadur Nagar</p>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="text-red-500 font-bold">
+                          ₹ 280 <span className="text-black"> / day</span>
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-semibold">⭐ 4.4</p>
+                      </div>
+                    </div>
+                    <div className="card-actions justify-end"></div>
+                  </div>
+                </div>
+              </div>
+              <Link to={"/explore"}>
+                <button className="btn btn-primary my-8">See All Spaces</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -329,11 +333,7 @@ const Home = () => {
               className="object-cover w-64 rounded-lg"
               alt=""
             />
-          </div>
-          <div className="carousel-item mr-6">
-    <img src="https://daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg"
-      className="w-64 rounded-lg" alt="city" />
-  </div>
+          </div> 
         </div>
       </div>
 

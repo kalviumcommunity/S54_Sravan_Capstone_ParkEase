@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config()
 app.use(cors(
   {
-    origin: ['https://parkez.vercel.app','http://localhost:5173', 'https://parkease-six.vercel.app'],
+    origin: ['https://parkez.vercel.app','http://localhost:5174'],
     methods: 'GET, POST, PUT, DELETE',
     allowedHeaders: 'Content-Type',
     credentials: true,
@@ -42,5 +42,5 @@ const SpacesRouter = require("./routes/Spaces")
 const fileUploadRouter = require("./routes/FileUpload");
 const UserRouter = require("./routes/Users")
 app.use('/spaces', SpacesRouter);
-app.use("/api/fileupload", fileUploadRouter);
+app.use("/fileupload", fileUploadRouter);
 app.use('/users',UserRouter)

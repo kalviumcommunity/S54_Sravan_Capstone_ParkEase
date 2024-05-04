@@ -6,10 +6,11 @@ const ParkingSpace = require('../schemas/SpaceSchema');
 
 const createSpace = async (req, res) => {
   try {
-    const { location, availability, capacity, price, features, owner, rating, reviews, image } = req.body;
+    const { location, availability, capacity, price, features, owner, rating, reviews, images } = req.body;
 
     // Validate required fields
-    if (!location || !availability || !price || !owner || !rating || !image || image.length === 0) {
+    if (!location  || !price || !owner || !images || images.length === 0) {
+      console.log(location, price, owner, images)
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
@@ -20,9 +21,9 @@ const createSpace = async (req, res) => {
       price,
       features,
       owner,
-      rating,
+      rating, 
       reviews,
-      image
+      images
     });
 
     // Save the space to the database
