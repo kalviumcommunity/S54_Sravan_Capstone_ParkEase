@@ -65,12 +65,12 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             <li>
               <Link to={"/"}>
-                <a>Home</a>
+                  Home
               </Link>
             </li>
             <li>
               <Link to={"/explore"}>
-                <a>Explore </a>
+                  Explore
               </Link>
             </li>
             <li>

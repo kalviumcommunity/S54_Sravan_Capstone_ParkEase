@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import pin from "../assets/Pin.svg";
 import { CiSearch } from "react-icons/ci";
-import data from "./data";
 import { PiPlusBold } from "react-icons/pi";
 import Form from "./Form";
+import axios from "axios";
+import { AppContext } from "../context/ProviderContext";
 
+const SkeletonLoading = () => (
+  <div className="flex flex-col gap-4 w-96 h-80">
+    <div className="skeleton h-32 w-full"></div>
+    <div className="skeleton h-4 w-28"></div>
+    <div className="skeleton h-4 w-full"></div>
+    <div className="skeleton h-4 w-full"></div>
+  </div>
+);
 
 const Explore = () => {
+  const [spacesData, setSpacesData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const {Added , userInfo } = useContext(AppContext)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3003/spaces/all");
+        setSpacesData(response.data);
+        setLoading(false); // data is fetched 
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [Added]);
 
   return (
     <>
@@ -24,28 +50,32 @@ const Explore = () => {
           </div>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          {data.map((space, index) => (
+        {loading
+        ? // Render skeletons if data is not yet fetched
+          Array.from({ length: 9 }).map((_, index) => <SkeletonLoading key={index} />)
+        : // Render spaces data once fetched
+          spacesData.map((space, index) => (
             <div
               key={index}
               className="card card-compact w-96 h-80 bg-base-100 shadow-xl relative"
             >
               <img
-                src={space.image}
+                src={space.images}
                 alt="Parking Space"
                 className="size-full rounded-md"
               />
               <div className="card-body absolute bottom-4 w-5/6 left-8 rounded-md bg-white">
-                <h2 className="card-title">{space.name}</h2>
+                <h2 className="card-title">{space.owner.name}</h2>
                 <div className="flex items-center">
                   <div className="flex items-center">
                     <img src={pin} className="size-4 mr-2" alt="" />
-                    <p>{space.address}</p>
+                    <p>{space.location.address}</p>
                   </div>
                 </div>
                 <div className="flex justify-between">
                   <div>
                     <p className="text-red-500 font-bold">
-                      ₹ {space.price} <span className="text-black"> / day</span>
+                      ₹ {space.price.hourly} <span className="text-black"> / day</span>
                     </p>
                   </div>
                   <div>
@@ -122,13 +152,13 @@ const Explore = () => {
           <div className="w-full mt-20 bottom-0">
             <button
               type="button"
-              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 w-full focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 w-full focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >
               My Spaces
             </button>
             <button
               type="button"
-              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 w-full focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+              className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 w-full focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
             >
               My Bookings
             </button>
@@ -142,11 +172,9 @@ const Explore = () => {
       </div>
 
       <dialog id="my_modal_1" className="modal">
-        <div className="modal-box p-0">
-          <div className="modal-action m-0">
-            <form method="dialog">
-                <Form />
-            </form>
+        <div className="modal-box p-0 ">
+          <div className="modal-action flex justify-normal p-4">
+                <Form method="dialog" />
           </div>
         </div>
       </dialog>

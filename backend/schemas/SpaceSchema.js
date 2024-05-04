@@ -7,7 +7,7 @@ const parkingSpaceSchema = new mongoose.Schema({
     address: { type: String, required: true }
   },
   availability: { type: String, enum: ['available', 'occupied'], default: 'available' },
-  capacity: { type: Number, required: true },
+  capacity: { type: Number },
   price: {
     hourly: { type: Number, required: true },
     daily: { type: Number, required: true },
@@ -18,7 +18,7 @@ const parkingSpaceSchema = new mongoose.Schema({
     name: { type: String, required: true },
     contact: { type: String, required: true }
   },
-  image : [{ type: String }],
+  images : [{ type: String }],
   rating: { type: Number, default: 0 },
   reviews: [{
     user: { type: String },
