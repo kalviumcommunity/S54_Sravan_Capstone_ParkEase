@@ -9,10 +9,9 @@ const ProviderContext = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [Added, SetAdded] = useState(0)
   const [coordinates, setCoordinates] = useState({ longitude: '', latitude: '' });
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // console.log("isSignedIn" , isSignedIn)
-    // console.log("isLoaded" , isLoaded)
     const getLocation = () => {
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition((position) => {
@@ -42,7 +41,7 @@ const ProviderContext = ({ children }) => {
     <AppContext.Provider
       value={{
         userInfo,
-        Added, SetAdded , coordinates
+        Added, SetAdded , coordinates , searchTerm , setSearchTerm
       }}
     >
       {children}

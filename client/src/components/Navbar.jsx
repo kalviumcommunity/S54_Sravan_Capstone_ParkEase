@@ -23,7 +23,13 @@ const Navbar = () => {
         console.error("Error creating user:", error);
       }
     };
-
+    
+    const modal = document.getElementById("my_modal_2");
+    if (!userInfo) {
+      modal.showModal(); // Show modal when userInfo is null (not logged in)
+    } else {
+      modal.close(); // Close modal if user is logged in
+    }
     createUserIfNeeded();
   }, [userInfo]);
 
@@ -69,7 +75,7 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/explore"}>
+              <Link to={ userInfo ? "/explore" : "/"}>
                   Explore
               </Link>
             </li>
@@ -98,7 +104,7 @@ const Navbar = () => {
               <SignIn className="border-none" />
             </SignedOut>
             <form method="dialog" className="modal-backdrop text-white">
-              <button>close</button>
+              <button>x</button>
             </form>
           </dialog>
         </div>
