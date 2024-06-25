@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import video from "../assets/video.webm";
 import { CiSearch } from "react-icons/ci";
 import { BiSolidOffer } from "react-icons/bi";
@@ -7,18 +7,34 @@ import { RiInformation2Line } from "react-icons/ri";
 import { SiGithub } from "react-icons/si";
 import { BsInstagram } from "react-icons/bs";
 import { ImLinkedin2 } from "react-icons/im";
-
 import icon from "../assets/Icon.svg";
 import icon2 from "../assets/Icon2.svg";
 import icon1 from "../assets/Icon3.svg";
 import pin from "../assets/Pin.svg";
-import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../context/ProviderContext";
 const Home = () => {
+  const { setSearchTerm , userInfo} = useContext(AppContext);
+    const [searchInput, setSearchInput] = useState("");
+    const navigate = useNavigate();
+  
+    const handleSearch = () => {
+      setSearchTerm(searchInput);
+      navigate("/explore");
+    };
+  
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        userInfo ?   handleSearch() : alert("Signup / Login to use Parkez");
+      }
+    };
+    const handleClick = () => {
+      userInfo ?   handleSearch() : alert("Signup / Login to use Parkez");
+    }
+
   return (
     <div className="">
       <div className="hero min-h-screen video-container">
-        {/* <div className="hero min-h-screen" style={{backgroundImage: 'url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)'}}> */}
         <video autoPlay muted loop className="hero-overlay object-cover">
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
@@ -29,13 +45,16 @@ const Home = () => {
             <h1 className="mb-5 text-5xl font-bold">WELCOME TO PARKEZ</h1>
             <p className="mb-5">Your Key to Hastle-Free Parking</p>
             <div className="join bg-white rounded-full  w-full max-w-md mb-5">
-              <input
+                 <input
                 type="text"
-                placeholder="Type here"
+                placeholder="Search for available parking"
                 className="input input-ghost w-full focus:outline-none focus:border-none focus:rounded-full"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                onKeyPress={handleKeyPress}
               />
-              <div className=" join-item rounded-r-full text-black p-3 bg-yellow-400">
-                <CiSearch className="size-6" />
+              <div className=" join-item rounded-r-full text-black p-3 bg-yellow-400" onClick={handleClick}>
+                <CiSearch className="size-6"  />
               </div>
             </div>
             <p className="mb-5">What are you looking for? </p>

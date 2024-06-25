@@ -1,5 +1,3 @@
-
-
 const cloudinary = require("../utils/clodinaryConfig");
 const fs = require('fs')
 const uploadFile = async (req, res, err) => {
