@@ -60,7 +60,7 @@ const Form = () => {
       }   
   
       const response = await axios.post(
-        "http://localhost:3003/fileupload/create", formData );
+        `${process.env.SERVER_URI}/fileupload/create`, formData );
   
       console.log(response.data.urls);
       setUrl(response.data.urls)
@@ -109,7 +109,7 @@ const Form = () => {
 
       // Create the space by posting to the server
       const spaceResponse = await axios.post(
-        "http://localhost:3003/spaces/",
+        `${process.env.SERVER_URI}spaces/`,
         spaceData
       );
 

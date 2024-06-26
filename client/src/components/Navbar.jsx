@@ -16,7 +16,7 @@ const Navbar = () => {
     const createUserIfNeeded = async () => {
       try {
         if (userInfo && userInfo.primaryEmailAddress) {
-          let res = await axios.post("http://localhost:3003/users/", { email: userInfo.primaryEmailAddress.emailAddress });
+          let res = await axios.post(`${process.env.SERVER_URI}/users/`, { email: userInfo.primaryEmailAddress.emailAddress });
           console.log(res); 
         }
       } catch (error){

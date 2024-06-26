@@ -16,7 +16,7 @@ const Map = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3003/spaces/all");
+        const response = await axios.get(`${process.env.SERVER_URI}spaces/all`);
         setSpacesData(response.data);
         setLoading(false);
       } catch (error) {
