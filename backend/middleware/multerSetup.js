@@ -1,10 +1,13 @@
 const multer = require("multer");
 
-//Multer Configuration
+// Multer Configuration
 const storage = multer.diskStorage({
-  filename: function (req, file, cb) {
-    cb(null,file.originalname);
+  destination: function (req, file, cb) {
+    cb(null, '/tmp'); // Use /tmp directory for writable access
   },
+  filename: function (req, file, cb) {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  }
 });
 
 const upload = multer({ storage: storage });
