@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
       const newUser = await User.create({ email });
       res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Failed to create user' });
+      res.json({ error: 'Failed to create user' });
     }
   };
 
