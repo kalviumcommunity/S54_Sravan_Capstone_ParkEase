@@ -60,7 +60,7 @@ const Form = () => {
       }   
   
       const response = await axios.post(
-        "http://localhost:3003/fileupload/create", formData );
+        "https://parkez-server.vercel.app/fileupload/create", formData );
   
       console.log(response.data.urls);
       setUrl(response.data.urls)
