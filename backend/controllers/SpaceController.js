@@ -1,6 +1,4 @@
-const cloudinary = require('../utils/clodinaryConfig');
 const Spaces = require('../schemas/SpaceSchema');
-const upload = require('../middleware/multerSetup');
 
 const ParkingSpace = require('../schemas/SpaceSchema');
 
