@@ -98,7 +98,7 @@ const SideBar = ({ data, onFocusMarker }) => {
         );
         console.log("order order ", order.data);
         const options = {
-          key: "rzp_test_OZ7AqYammx4KXp",
+          key: import.meta.env.RAZORPAY_KEY_ID,
           amount: amount,
           currency: currency,
           name: "Parkez",
