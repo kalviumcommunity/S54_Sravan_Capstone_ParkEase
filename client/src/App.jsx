@@ -6,6 +6,7 @@ import Map from './map/Map'
 import ProtectedRoutes from './utils/ProtectedRoutes'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Explore from './components/Explore';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route element={<ProtectedRoutes />} >
         <Route path='/explore' element={<Map />} />
+        <Route path='/rent' element={<Explore />} />
         </Route>
       </Routes>
       <ToastContainer />
