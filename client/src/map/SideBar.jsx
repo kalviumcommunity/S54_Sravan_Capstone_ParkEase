@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import { toast } from 'react-toastify';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import SkeletonLoader from "./SkeletonLoader.jsx";
 
 const SideBar = ({ data, onFocusMarker }) => {
   const [selectedDiv, setSelectedDiv] = useState(null);
@@ -16,6 +17,14 @@ const SideBar = ({ data, onFocusMarker }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
 
   const openModal = (elem) => {
     setSelectedDiv(elem);
@@ -98,7 +107,7 @@ const SideBar = ({ data, onFocusMarker }) => {
         );
         console.log("order order ", order.data);
         const options = {
-          key: import.meta.env.RAZORPAY_KEY_ID,
+          key: "rzp_test_OZ7AqYammx4KXp",
           amount: amount,
           currency: currency,
           name: "Parkez",
@@ -185,60 +194,64 @@ const SideBar = ({ data, onFocusMarker }) => {
               <CiSearch className="size-6" />
             </div>
           </div>
-          {filteredData.length > 0 ? (
-            filteredData.map((elem, index) => (
-              <div
-                key={index}
-                className="m-2 shadow-md rounded-md hover:scale-105 cursor-pointer"
-                onClick={() => handleDivClick(elem)}
-              >
-                <h3 className="bg-blue-500 text-lg p-1 text-white rounded-t-md">
-                  {elem.location.address}
-                </h3>
-                <div className="flex justify-around text-3xl p-3">
-                  <p className="">₹{elem.price.hourly}</p>
-                  <button
-                    className="text-blue-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-gray-100 font-semibold rounded-md text-sm px-2 py-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openModal(elem);
-                    }}
-                  >
-                    View More
-                  </button>
-                </div>
-              </div>
+          {isLoading ? (
+            // Render Skeleton Loaders while loading
+            Array.from({ length: 5 }).map((_, index) => (
+              <SkeletonLoader key={index} />
             ))
           ) : (
-            <div className="text-center text-gray-500 mt-4">
-              No Places Exist
-            </div>
+            filteredData.length > 0 ? (
+              filteredData.map((elem, index) => (
+                <div
+                  key={index}
+                  className="m-2 shadow-md rounded-md hover:scale-105 cursor-pointer"
+                  onClick={() => handleDivClick(elem)}
+                >
+                  <h3 className="bg-blue-500 text-lg p-1 text-white rounded-t-md">
+                    {elem.location.address}
+                  </h3>
+                  <div className="flex justify-around text-3xl p-3">
+                    <p className="">₹{elem.price.hourly}</p>
+                    <button
+                      className="text-blue-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-gray-100 font-semibold rounded-md text-sm px-2 py-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(elem);
+                      }}
+                    >
+                      View More
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 mt-4">
+                No Places Exist
+              </div>
+            )
           )}
         </div>
       </div>
       {selectedDiv && (
         <dialog id="my_modal_4" className="modal m-0">
-          <div className="modal-box w-11/12 max-w-4xl m-0">
-            <div className="bg-white z-10 rounded-md md:flex ">
-              <div>
-                <img src={selectedDiv.images[0]} className="w-96" alt="" />
-              </div>
-              <div className="text-center flex flex-col justify-between p-4">
-                <div className="text-start">
-                  <h2 className="text-xl mb-2">{selectedDiv.owner.name}</h2>
-                  <p className="text-2xl font-semibold mb-4">
-                    {selectedDiv.price.hourly} INR/hour
-                  </p>
-                  <p>
-                    {selectedDiv.features.map((elem, index) => (
-                      <span key={index}>{elem.toUpperCase()} | </span>
-                    ))}
-                  </p>
+          <div className="modal-box w-11/12 max-w-2xl p-0">
+            <div className="flex bg-slate-100">
+              <figure className="rounded w-60">
+                <img
+                  src="https://placeimg.com/400/400/arch"
+                  alt="Modal Image"
+                  className="rounded-l"
+                />
+              </figure>
+              <div className="pl-4 pt-2 w-full flex flex-col justify-between">
+                <div>
+                  <h3 className="font-bold text-lg">{selectedDiv.location.address}</h3>
+                  <p className="py-4 text-md">{selectedDiv.description}</p>
                 </div>
                 {showBookingDetails && (
-                  <div className="bg-white z-10 rounded-md text-start mt-3 text-center">
-                    <div className="">
-                      <label className="text-purple-600 text-md font-medium text-gray-900 dark:text-white">
+                  <div className="flex flex-col">
+                    <div className="mb-4">
+                      <label className="mr-5 text-green-600 text-md font-medium text-gray-900 dark:text-white">
                         From :{" "}
                       </label>
                       <DatePicker
