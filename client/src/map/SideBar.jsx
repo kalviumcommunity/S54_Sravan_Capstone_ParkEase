@@ -17,6 +17,14 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    // Simulate data loading
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
 
   // useEffect(() => {
   //   // Simulate data loading
@@ -107,7 +115,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
         );
         console.log("order order ", order.data);
         const options = {
-          key: import.meta.env.RAZORPAY_KEY_ID,
+          key: "rzp_test_OZ7AqYammx4KXp",
           amount: amount,
           currency: currency,
           name: "Parkez",
@@ -251,6 +259,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
                       <span key={index}>{elem.toUpperCase()} | </span>
                     ))}
                   </p>
+
                 </div>
                 {showBookingDetails && (
                   <div className="flex flex-col">
