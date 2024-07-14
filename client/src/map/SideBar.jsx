@@ -7,8 +7,9 @@ import DatePicker from "react-datepicker";
 import { toast } from 'react-toastify';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import SkeletonLoader from "./SkeletonLoader.jsx";
 
-const SideBar = ({ data, onFocusMarker }) => {
+const SideBar = ({ data, onFocusMarker , loading }) => {
   const [selectedDiv, setSelectedDiv] = useState(null);
   const { searchTerm, setSearchTerm } = useContext(AppContext);
   const [filteredData, setFilteredData] = useState(data);
@@ -16,6 +17,13 @@ const SideBar = ({ data, onFocusMarker }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
+
+  // useEffect(() => {
+  //   // Simulate data loading
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2000);
+  // }, []);
 
   const openModal = (elem) => {
     setSelectedDiv(elem);
@@ -29,6 +37,7 @@ const SideBar = ({ data, onFocusMarker }) => {
   const closeModal = () => {
     setSelectedDiv(null);
     setShowBookingDetails(false);
+    setTotalCost(0);
     const modal = document.getElementById("my_modal_4");
     if (modal) modal.close();
   };
@@ -84,7 +93,7 @@ const SideBar = ({ data, onFocusMarker }) => {
 
       try {
         const order = await axios.post(
-          "http://localhost:3003/payment/order",
+          "https://parkez-server.vercel.app/payment/order",
           {
             amount,
             currency,
@@ -110,7 +119,7 @@ const SideBar = ({ data, onFocusMarker }) => {
             console.log("body", body);
             try {
               const validateResponse = await axios.post(
-                "http://localhost:3003/payment/validate",
+                "https://parkez-server.vercel.app/payment/validate",
                 JSON.stringify(body),
                 {
                   headers: {
@@ -154,6 +163,7 @@ const SideBar = ({ data, onFocusMarker }) => {
           });
         });
 
+        closeModal();
         rzp1.open();
         event.preventDefault();
       } catch (error) {
@@ -185,40 +195,47 @@ const SideBar = ({ data, onFocusMarker }) => {
               <CiSearch className="size-6" />
             </div>
           </div>
-          {filteredData.length > 0 ? (
-            filteredData.map((elem, index) => (
-              <div
-                key={index}
-                className="m-2 shadow-md rounded-md hover:scale-105 cursor-pointer"
-                onClick={() => handleDivClick(elem)}
-              >
-                <h3 className="bg-blue-500 text-lg p-1 text-white rounded-t-md">
-                  {elem.location.address}
-                </h3>
-                <div className="flex justify-around text-3xl p-3">
-                  <p className="">₹{elem.price.hourly}</p>
-                  <button
-                    className="text-blue-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-gray-100 font-semibold rounded-md text-sm px-2 py-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openModal(elem);
-                    }}
-                  >
-                    View More
-                  </button>
-                </div>
-              </div>
+          {loading ? (
+            // Render Skeleton Loaders while loading
+            Array.from({ length: 5 }).map((_, index) => (
+              <SkeletonLoader key={index} />
             ))
           ) : (
-            <div className="text-center text-gray-500 mt-4">
-              No Places Exist
-            </div>
+            filteredData.length > 0 ? (
+              filteredData.map((elem, index) => (
+                <div
+                  key={index}
+                  className="m-2 shadow-md rounded-md hover:scale-105 cursor-pointer"
+                  onClick={() => handleDivClick(elem)}
+                >
+                  <h3 className="bg-blue-500 text-lg p-1 text-white rounded-t-md">
+                    {elem.location.address}
+                  </h3>
+                  <div className="flex justify-around text-3xl p-3">
+                    <p className="">₹{elem.price.hourly}</p>
+                    <button
+                      className="text-blue-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-gray-100 font-semibold rounded-md text-sm px-2 py-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal(elem);
+                      }}
+                    >
+                      View More
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500 mt-4">
+                No Places Exist
+              </div>
+            )
           )}
         </div>
       </div>
       {selectedDiv && (
-        <dialog id="my_modal_4" className="modal m-0">
-          <div className="modal-box w-11/12 max-w-4xl m-0">
+        <dialog id="my_modal_4" className="modal m-0 	">
+          <div className="modal-box w-11/12 max-w-4xl m-0 z-40">
             <div className="bg-white z-10 rounded-md md:flex ">
               <div>
                 <img src={selectedDiv.images[0]} className="w-96" alt="" />
@@ -236,9 +253,9 @@ const SideBar = ({ data, onFocusMarker }) => {
                   </p>
                 </div>
                 {showBookingDetails && (
-                  <div className="bg-white z-10 rounded-md text-start mt-3 text-center">
-                    <div className="">
-                      <label className="text-purple-600 text-md font-medium text-gray-900 dark:text-white">
+                  <div className="flex flex-col">
+                    <div className="mb-4">
+                      <label className="mr-5 text-green-600 text-md font-medium text-gray-900 dark:text-white">
                         From :{" "}
                       </label>
                       <DatePicker
@@ -266,7 +283,7 @@ const SideBar = ({ data, onFocusMarker }) => {
                 <div className="m-3 ml-4 flex justify-between">
                   <button
                     className="bg-blue-600 glass btn  hover:bg-blue-500 text-white rounded-lg"
-                    style={{ width: `${showBookingDetails ? "50%" : "100%"}` }}
+                    style={{ width: `${showBookingDetails ? "50%" : "100%"} `}}
                   >
                     <a
                       href={`https://maps.google.com/?daddr=${selectedDiv.location.latitude},${selectedDiv.location.longitude}`}
@@ -298,7 +315,7 @@ const SideBar = ({ data, onFocusMarker }) => {
             </div>
             <div className="modal-action bg-slate-100 p-2 m-0">
               <form method="dialog">
-                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>
                   ✕
                 </button>
                 <div className="absolute bottom-7 left-12 flex items-center">

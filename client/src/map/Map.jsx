@@ -21,6 +21,10 @@ const Map = () => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        toast.error("Error fetching data ", {
+          position: "top-center"
+        });
+        setLoading(false);
       }
     };
 
@@ -66,7 +70,7 @@ const Map = () => {
 
   return (
     <div className='w-full flex'>
-      <SideBar data={spacesData} onFocusMarker={onFocusMarker} />
+      <SideBar data={spacesData} onFocusMarker={onFocusMarker} loading={loading} />
       <MapContainer
         className='z-10 w-3/4'
         center={{ lat: 51.505, lng: -0.09 }}

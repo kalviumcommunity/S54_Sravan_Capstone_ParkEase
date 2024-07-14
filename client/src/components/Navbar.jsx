@@ -60,9 +60,6 @@ const Navbar = () => {
               <li>
                 <a>Explore</a>
               </li>
-              <li>
-                <a>About US</a>
-              </li>
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">PARKEZ</a>
@@ -80,7 +77,9 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <a>About US </a>
+              <Link to={ userInfo ? "/rent" : "/"}>
+                  Rent
+              </Link>
             </li>
           </ul>
         </div>
