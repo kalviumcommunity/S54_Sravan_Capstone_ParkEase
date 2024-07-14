@@ -14,23 +14,23 @@ import pin from "../assets/Pin.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/ProviderContext";
 const Home = () => {
-  const { setSearchTerm , userInfo} = useContext(AppContext);
-    const [searchInput, setSearchInput] = useState("");
-    const navigate = useNavigate();
-  
-    const handleSearch = () => {
-      setSearchTerm(searchInput);
-      navigate("/explore");
-    };
-  
-    const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        userInfo ?   handleSearch() : alert("Signup / Login to use Parkez");
-      }
-    };
-    const handleClick = () => {
-      userInfo ?   handleSearch() : alert("Signup / Login to use Parkez");
+  const { setSearchTerm, userInfo } = useContext(AppContext);
+  const [searchInput, setSearchInput] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    setSearchTerm(searchInput);
+    navigate("/explore");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      userInfo ? handleSearch() : alert("Signup / Login to use Parkez");
     }
+  };
+  const handleClick = () => {
+    userInfo ? handleSearch() : alert("Signup / Login to use Parkez");
+  };
 
   return (
     <div className="">
@@ -45,7 +45,7 @@ const Home = () => {
             <h1 className="mb-5 text-5xl font-bold">WELCOME TO PARKEZ</h1>
             <p className="mb-5">Your Key to Hastle-Free Parking</p>
             <div className="join bg-white rounded-full  w-full max-w-md mb-5">
-                 <input
+              <input
                 type="text"
                 placeholder="Search for available parking"
                 className="input input-ghost w-full focus:outline-none focus:border-none focus:rounded-full"
@@ -53,8 +53,11 @@ const Home = () => {
                 onChange={(e) => setSearchInput(e.target.value)}
                 onKeyPress={handleKeyPress}
               />
-              <div className=" join-item rounded-r-full text-black p-3 bg-yellow-400" onClick={handleClick}>
-                <CiSearch className="size-6"  />
+              <div
+                className=" join-item rounded-r-full text-black p-3 bg-yellow-400"
+                onClick={handleClick}
+              >
+                <CiSearch className="size-6" />
               </div>
             </div>
             <p className="mb-5">What are you looking for? </p>
@@ -89,27 +92,26 @@ const Home = () => {
               Why You Should Use Parkez
             </h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in sdggdbvdo Quaerat.
+              Following are the reasons for which you can use parkez.
             </p>
 
-            <div className="md:flex  justify-center">
+            <div className="md:flex justify-center">
               <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
                 <img src={icon} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Convenience</h5>
-                <p>
-                  We offer expert legal help for all related property items.</p>
+                <p>Easily find and book parking spots , saving your time.</p>
               </div>
-              <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
+              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
                 <img src={icon1} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Cost-Effective</h5>
-                <p>
-                  We offer expert legal help for all related property items.</p>
+                <p>Save money with competitive pricing.</p>
               </div>
-              <div className="w-80 text-center flex-col justify-center  my-12  mx-10 md:my-0 md:mx-0">
+              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
                 <img src={icon2} alt="" className="mx-auto" />
                 <h5 className="text font-bold my-3">Community Engagement</h5>
                 <p>
-                  We offer expert legal help for all related property items.</p>
+                  Join a community of users who share and rate parking spaces.
+                </p>
               </div>
             </div>
 
@@ -119,7 +121,7 @@ const Home = () => {
                 Featured Park Spaces
               </h1>
               <p className="py-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Discover the best spots handpicked for you.{" "}
               </p>
             </div>
             <div>
@@ -305,7 +307,7 @@ const Home = () => {
           Find Parking in These Cities
         </h1>
         <p className="py-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Explore convenient parking locations across major cities.{" "}
         </p>
 
         <div className="carousel carousel-end rounded-lg">
@@ -352,7 +354,7 @@ const Home = () => {
               className="object-cover w-64 rounded-lg"
               alt=""
             />
-          </div> 
+          </div>
         </div>
       </div>
 

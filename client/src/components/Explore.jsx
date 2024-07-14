@@ -3,15 +3,7 @@ import { PiPlusBold } from "react-icons/pi";
 import Form from "./Form";
 import axios from "axios";
 import { AppContext } from "../context/ProviderContext";
-
-const SkeletonLoading = () => (
-  <div className="flex flex-col gap-4 w-96 h-80">
-    <div className="skeleton h-32 w-full"></div>
-    <div className="skeleton h-4 w-28"></div>
-    <div className="skeleton h-4 w-full"></div>
-    <div className="skeleton h-4 w-full"></div>
-  </div>
-);
+import { toast } from "react-toastify";
 
 const Explore = () => {
   const [spacesData, setSpacesData] = useState([]);
@@ -28,6 +20,9 @@ const Explore = () => {
         setLoading(false); // data is fetched
       } catch (error) {
         console.error("Error fetching data:", error);
+        toast.error("Error fetching data", {
+          position: "top-center"
+        });
       }
     };
 
