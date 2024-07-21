@@ -27,7 +27,7 @@ const createSpace = async (req, res) => {
     const savedSpace = await newSpace.save();
 
     // Add the space to the user's list of spaces
-    await User.findByIdAndUpdate(ownerId, { $push: { myspaces: savedSpace._id } });
+    await User.findOneAndUpdate({ clerkUserId: ownerId }, { $push: { myspaces: savedSpace._id } });
 
     res.status(201).json({ message: 'Parking space created successfully', space: savedSpace });
 

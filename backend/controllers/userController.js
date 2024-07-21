@@ -1,21 +1,24 @@
 const User = require('../schemas/userSchema');
 
-// Controller to create a new user only if it doesn't exist
+// Controller to create a new user only if doesn't exist
 const createUser = async (req, res) => {
-    try {
-      const { email } = req.body;
-      // Check if the user already exists
-      const existingUser = await User.findOne({ email });
-      if (existingUser) {
-        return res.status(200).json(existingUser);
-      } 
-      // If user doesn't exist, create a new user
-      const newUser = await User.create({ email });
-      res.status(201).json(newUser);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to create user' });
+  try {
+    const { email, clerkUserId } = req.body;
+    
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(200).json(existingUser);
     }
-  };
+
+    // If user doesn't exist, create a new user with Clerk user ID
+    const newUser = await User.create({ email, clerkUserId });
+    res.status(201).json(newUser);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to create user' });
+  }
+};
+
 
 // Controller to get all users
 const getUsers = async (req, res) => {

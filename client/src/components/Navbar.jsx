@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ProviderContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { userInfo } = useContext(AppContext);
@@ -16,8 +17,12 @@ const Navbar = () => {
     const createUserIfNeeded = async () => {
       try {
         if (userInfo && userInfo.primaryEmailAddress) {
-          let res = await axios.post("https://parkez-server.vercel.app/users/", { email: userInfo.primaryEmailAddress.emailAddress });
+          let res = await axios.post("https://parkez-server.vercel.app/users/", { 
+           email: userInfo.primaryEmailAddress.emailAddress ,
+           clerkUserId: userInfo.id,
+          });
           console.log(res); 
+          toast.success("User created successfully", { position: "top-right" });
         }
       } catch (error){
         console.error("Error creating user:", error);
@@ -50,15 +55,11 @@ const Navbar = () => {
               <li>
                 <a>Home</a>
               </li>
-              {/* <li>
-          <a>Parent</a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li> */}
               <li>
                 <a>Explore</a>
+              </li>
+              <li>
+                <a>Rent</a>
               </li>
             </ul>
           </div>

@@ -16,10 +16,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route element={<ProtectedRoutes />} >
+        {/* <Route element={<ProtectedRoutes />} > */}
         <Route path='/explore' element={<Map />} />
         <Route path='/rent' element={<Explore />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
       <ToastContainer />
     </div>
