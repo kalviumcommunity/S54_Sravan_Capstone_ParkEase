@@ -28,6 +28,7 @@ const ProviderContext = ({ children }) => {
       }
   };
   getLocation();  
+
     if (isLoaded && isSignedIn) {
       setUserInfo(user);
       console.log("signed in",user.primaryEmailAddress.emailAddress)

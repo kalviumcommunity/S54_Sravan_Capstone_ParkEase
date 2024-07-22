@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { AppContext } from '../context/ProviderContext'
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoutes = () => {
+const ProtectedRoutes = ({ element }) => {
     const { userInfo } = useContext(AppContext);
-  return userInfo ? <Outlet /> :  <Navigate to={"/"} />
+  return userInfo ? element :  <Navigate to={"/"} />
 }
 
 export default ProtectedRoutes
