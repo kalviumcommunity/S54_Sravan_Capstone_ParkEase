@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ProviderContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { userInfo } = useContext(AppContext);
@@ -16,20 +17,27 @@ const Navbar = () => {
     const createUserIfNeeded = async () => {
       try {
         if (userInfo && userInfo.primaryEmailAddress) {
-          let res = await axios.post("https://parkez-server.vercel.app/users/", { email: userInfo.primaryEmailAddress.emailAddress });
-          console.log(res); 
+          let res = await axios.post("https://parkez-server.vercel.app/users/", { 
+           email: userInfo.primaryEmailAddress.emailAddress ,
+           clerkUserId: userInfo.id,
+          });
+          if(res.status == 201){
+            toast.success("Welcome! Your account has been created successfully.", { position: "top-right" });
+          }else if (res.status == 200){
+            toast.success("Welcome back! You have successflly log in is successful." , { position : "top-right"}
+            )
+          }
         }
       } catch (error){
         console.error("Error creating user:", error);
       }
     };
     
-    const modal = document.getElementById("my_modal_2");
+    // const modal = document.getElementById("my_modal_2");
     if (!userInfo) {
-      modal.showModal(); // Show modal when userInfo is null (not logged in)
-    } else {
-      modal.close(); // Close modal if user is logged in
+      toast.info("Please Log in to use parkez", { position : "top-center"})
     }
+   
     createUserIfNeeded();
   }, [userInfo]);
 
@@ -50,15 +58,11 @@ const Navbar = () => {
               <li>
                 <a>Home</a>
               </li>
-              {/* <li>
-          <a>Parent</a>
-          <ul className="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li> */}
               <li>
                 <a>Explore</a>
+              </li>
+              <li>
+                <a>Rent</a>
               </li>
             </ul>
           </div>
@@ -98,13 +102,13 @@ const Navbar = () => {
               <UserButton />
             </div>
           </SignedIn>
-          <dialog id="my_modal_2" className="modal flex-col items-start">
+          <dialog id="my_modal_2" className="modal flex-col items-start  mt-32">
             <SignedOut>
               <SignIn className="border-none" />
             </SignedOut>
-            <form method="dialog" className="modal-backdrop text-white">
+            {/* <form method="dialog" className="modal-backdrop text-white">
               <button>x</button>
-            </form>
+            </form> */}
           </dialog>
         </div>
       </div>

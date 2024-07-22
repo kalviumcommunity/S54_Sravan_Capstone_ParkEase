@@ -19,8 +19,7 @@ const ProviderContext = ({ children }) => {
               const longitude = position.coords.longitude;
               console.log(latitude , longitude)
               setCoordinates({ longitude: Number(position.coords.longitude),latitude : Number(position.coords.latitude) });
-
-              // Now you can do whatever you want with latitude and longitude
+              // we got  latitude and longitude
           }, (error) => {
               console.error("Error getting location:", error.message);
           });
@@ -29,6 +28,7 @@ const ProviderContext = ({ children }) => {
       }
   };
   getLocation();  
+
     if (isLoaded && isSignedIn) {
       setUserInfo(user);
       console.log("signed in",user.primaryEmailAddress.emailAddress)
