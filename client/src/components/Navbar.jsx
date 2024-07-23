@@ -4,42 +4,43 @@ import {
   SignedOut,
   SignIn,
   UserButton,
+  useUser,
 } from "@clerk/clerk-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/ProviderContext";
 import { toast } from "react-toastify";
-
+import logo from "../assets/favicon.png"
 const Navbar = () => {
   const { userInfo } = useContext(AppContext);
+  const { isSignedIn } = useUser();
 
   useEffect(() => {
     const createUserIfNeeded = async () => {
       try {
         if (userInfo && userInfo.primaryEmailAddress) {
           let res = await axios.post("https://parkez-server.vercel.app/users/", { 
-           email: userInfo.primaryEmailAddress.emailAddress ,
-           clerkUserId: userInfo.id,
+            email: userInfo.primaryEmailAddress.emailAddress,
+            clerkUserId: userInfo.id,
           });
-          if(res.status == 201){
+          if (res.status === 201) {
             toast.success("Welcome! Your account has been created successfully.", { position: "top-right" });
-          }else if (res.status == 200){
-            toast.success("Welcome back! You have successflly log in is successful." , { position : "top-right"}
-            )
+          } else if (res.status === 200) {
+            toast.success("Welcome back to parkez", { position: "top-right" });
           }
         }
-      } catch (error){
+      } catch (error) {
         console.error("Error creating user:", error);
+        toast.error("Oops! There was a problem creating your account.", { position: "top-right" });
       }
     };
-    
-    // const modal = document.getElementById("my_modal_2");
-    if (!userInfo) {
-      toast.info("Please Log in to use parkez", { position : "top-center"})
+
+    // Only run createUserIfNeeded if the user is signed in
+    if (isSignedIn) {
+      createUserIfNeeded();
     }
-   
-    createUserIfNeeded();
   }, [userInfo]);
+
 
   return (
     <div>
@@ -66,6 +67,9 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+          <div className="flex">
+            <img src={logo} className="size-12 rounded-lg" alt="" />
+          </div>
           <a className="btn btn-ghost text-xl">PARKEZ</a>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -83,6 +87,11 @@ const Navbar = () => {
             <li>
               <Link to={ userInfo ? "/rent" : "/"}>
                   Rent
+              </Link>
+            </li>
+            <li>
+              <Link to={"/about"}>
+                  About
               </Link>
             </li>
           </ul>

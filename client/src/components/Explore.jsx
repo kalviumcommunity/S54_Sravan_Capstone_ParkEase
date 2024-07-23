@@ -31,14 +31,14 @@ const Explore = () => {
 
   return (
     <>
-      <div className="hero bg-base-200 min-h-screen bg-img">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero bg-base-200 min-h-screen bg-img text-center md:text-left">
+        <div className="hero-content flex-col lg:flex-row-reverse ">
           <img
             src="https://media.istockphoto.com/id/1217060814/vector/parking-lot-background-3d-render-of-car-park-with-empty-wall-wall-graphic-background.jpg?s=612x612&w=0&k=20&c=z6GP9bZMt_0SXGW4fJrq1OD2dTiDaplw5CUx6k7XRcM="
             className="max-w-md rounded-lg shadow-2xl"
           />
           <div className="">
-            <h1 className="text-6xl font-bold">
+            <h1 className="text-4xl md:text-6xl font-bold">
               Make money by <br /> renting out your space{" "}
             </h1>
             <p className="py-8 font-semibold">

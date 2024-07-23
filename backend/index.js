@@ -33,10 +33,12 @@ const SpacesRouter = require("./routes/Spaces")
 const fileUploadRouter = require("./routes/FileUpload");
 const UserRouter = require("./routes/Users")
 const PaymentsRouter = require("./routes/Payments")
+const EmailRouter = require("./routes/email")
 app.use('/spaces', SpacesRouter);
 app.use("/fileupload", fileUploadRouter);
 app.use('/users',UserRouter)
 app.use('/payment' ,PaymentsRouter)
+app.use('/mail', EmailRouter)
 // Error Handling Middleware 
 app.use((err, req, res) => {
   console.error(err.stack); 

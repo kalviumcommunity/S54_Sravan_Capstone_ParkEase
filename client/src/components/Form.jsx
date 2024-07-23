@@ -3,6 +3,7 @@ import axios from "axios";
 import uploadImage from "../assets/man-uploading-data.svg";
 import { AppContext } from "../context/ProviderContext";
 import { toast } from "react-toastify";
+import sendEmail from "../utils/emailService";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Form = () => {
     price: {
       hourly: "",
       daily: "",
-      monthly: ""
+      monthly: "",
     },
     images: [],
     description: "",
@@ -18,13 +19,14 @@ const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [files, setFiles] = useState([]);
   const [url, setUrl] = useState(null);
-  const { Added, userInfo, SetAdded, coordinates } = useContext(AppContext)
+  const { Added, userInfo, SetAdded, coordinates } = useContext(AppContext);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === "hourlyPrice") {
       const hourlyPrice = parseFloat(value); // Convert value to a float
-      if (!isNaN(hourlyPrice)) { // Check if it's a valid number
+      if (!isNaN(hourlyPrice)) {
+        // Check if it's a valid number
         const dailyPrice = hourlyPrice * 24;
         const monthlyPrice = hourlyPrice * 24 * 30;
 
@@ -40,11 +42,13 @@ const Form = () => {
     } else if (name === "images") {
       const selectedFiles = Array.from(e.target.files);
       setFiles([...files, ...selectedFiles]);
-  
-    
+
       setFormData((prevData) => ({
         ...prevData,
-        images: [...prevData.images, ...selectedFiles.map(file => URL.createObjectURL(file))]
+        images: [
+          ...prevData.images,
+          ...selectedFiles.map((file) => URL.createObjectURL(file)),
+        ],
       }));
     } else {
       setFormData((prevData) => ({
@@ -57,30 +61,32 @@ const Form = () => {
   const handleFileUpload = async () => {
     try {
       const formData = new FormData();
-      for(let i =0; i < files.length; i++) {
+      for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
-      }   
-  
+      }
+
       const response = await axios.post(
-        "https://parkez-server.vercel.app/fileupload/create", formData );
-  
+        "https://parkez-server.vercel.app/fileupload/create",
+        formData
+      );
+
       console.log(response.data.urls);
-      setUrl(response.data.urls)
+      setUrl(response.data.urls);
       toast.success("Images uploaded successfully", { position: "top-right" });
     } catch (error) {
       console.error("Error uploading the files:", error);
       toast.error("Error uploading files", { position: "top-right" });
-
     }
   };
-  const removeImage = (indexToRemove) => { // Remove image from files array
+  const removeImage = (indexToRemove) => {
+    // Remove image from files array
     const updatedFiles = files.filter((_, index) => index !== indexToRemove);
     setFiles(updatedFiles);
-  
+
     // Update formData.images as well
     setFormData((prevData) => ({
       ...prevData,
-      images: prevData.images.filter((_, index) => index !== indexToRemove)
+      images: prevData.images.filter((_, index) => index !== indexToRemove),
     }));
   };
 
@@ -91,22 +97,22 @@ const Form = () => {
         location: {
           latitude: coordinates.latitude,
           longitude: coordinates.longitude,
-          address: formData.address
+          address: formData.address,
         },
         price: {
           hourly: formData.price.hourly,
           daily: formData.price.daily,
-          monthly: formData.price.monthly
+          monthly: formData.price.monthly,
         },
         features: formData.description,
         owner: {
           name: userInfo.username,
-          contact: userInfo.primaryEmailAddress.emailAddress
+          contact: userInfo.primaryEmailAddress.emailAddress,
         },
         rating: 0, // Default rating
         reviews: [], // No reviews initially
         images: url,
-        ownerId: userInfo.id // Include owner ID
+        ownerId: userInfo.id, // Include owner ID
       };
 
       console.log(spaceData);
@@ -122,7 +128,14 @@ const Form = () => {
 
       console.log("Space created:", spaceResponse.data);
       toast.success("Space created successfully", { position: "top-right" });
-
+      const to = userInfo.primaryEmailAddress.emailAddress;
+      const subject = "New Space Created";
+      let html = ` <h1>Parkez</h1>
+            <h2>New Space Created</h2>
+            <p>Dear ${userInfo.username},</p>
+            <p>Your new parking space has been successfully created and is now available for booking.</p>
+            <p>Thank you for using Parkez!</p>`
+      await sendEmail(to , subject  , html);
       // Reset form data and current step
       setCurrentStep(1);
       setFormData({
@@ -130,7 +143,7 @@ const Form = () => {
         price: {
           hourly: "",
           daily: "",
-          monthly: ""
+          monthly: "",
         },
         images: [],
         description: "",
@@ -146,73 +159,90 @@ const Form = () => {
     <div className="grow self-stretch">
       <div className="flex">
         <ul className="steps grow steps-horizontal">
-          <li className={`step ${currentStep === 1 ? "step-primary" : ""}`} onClick={() => setCurrentStep(1)}>Upload Images</li>
-          <li className={`step ${currentStep === 2 ? "step-primary" : ""}`} onClick={() => setCurrentStep(2)}>Location & Price</li>
-          <li className={`step ${currentStep === 3 ? "step-primary" : ""}`} onClick={() => setCurrentStep(3)}>Description</li>
+          <li
+            className={`step ${currentStep === 1 ? "step-primary" : ""}`}
+            onClick={() => setCurrentStep(1)}
+          >
+            Upload Images
+          </li>
+          <li
+            className={`step ${currentStep === 2 ? "step-primary" : ""}`}
+            onClick={() => setCurrentStep(2)}
+          >
+            Location & Price
+          </li>
+          <li
+            className={`step ${currentStep === 3 ? "step-primary" : ""}`}
+            onClick={() => setCurrentStep(3)}
+          >
+            Description
+          </li>
         </ul>
       </div>
       <form onSubmit={handleSubmit} className="w-full">
         <div className="m-4">
-        {currentStep === 1 && (
-          <div>
-            <h2 className="text-lg font-semibold mb-4">Step 1: Upload Images</h2>
-            <div className="file-upload text-center">
-              <label
-                htmlFor="dropzone-file"
-                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer bg-slate-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-slate-200 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-              >
-                <img src={uploadImage} className="w-52" alt="" />
-                <h1 className="text-gray-700 mb-3 font-semibold ">
-                  Upload your images
-                </h1>
-                <input
-                  id="dropzone-file"
-                  type="file"
-                  onChange={handleInputChange}
-                  className="hidden"
-                  multiple
-                  name="images"
-                />
-              </label>
-              <div className="w-full text-start">
-                <h4 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
-                  To Upload
-                </h4>
-                <ul className="flex flex-wrap -m-1">
-                  {formData.images.length === 0 && (
-                    <li className="h-full w-full text-center flex flex-col items-center justify-center">
-                      <img
-                        className="mx-auto w-32"
-                        src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
-                        alt="no data"
-                      />
-                      <span className="text-small text-gray-500">
-                        No files selected
-                      </span>
-                    </li>
-                  )}
-                  {formData.images.map((image, index) => (
-                    <li key={index} className="m-1">
-                      <div className="relative">
+          {currentStep === 1 && (
+            <div>
+              <h2 className="text-lg font-semibold mb-4">
+                Step 1: Upload Images
+              </h2>
+              <div className="file-upload text-center">
+                <label
+                  htmlFor="dropzone-file"
+                  className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer bg-slate-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-slate-200 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                >
+                  <img src={uploadImage} className="w-52" alt="" />
+                  <h1 className="text-gray-700 mb-3 font-semibold ">
+                    Upload your images
+                  </h1>
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    onChange={handleInputChange}
+                    className="hidden"
+                    multiple
+                    name="images"
+                  />
+                </label>
+                <div className="w-full text-start">
+                  <h4 className="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                    To Upload
+                  </h4>
+                  <ul className="flex flex-wrap -m-1">
+                    {formData.images.length === 0 && (
+                      <li className="h-full w-full text-center flex flex-col items-center justify-center">
                         <img
-                          src={image}
-                          alt={`file-${index}`}
-                          className="w-32"
+                          className="mx-auto w-32"
+                          src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
+                          alt="no data"
                         />
-                        <button
-                          className="btn btn-xs btn-circle btn-error absolute right-0 top-0"
-                          onClick={() => removeImage(index)}
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                        <span className="text-small text-gray-500">
+                          No files selected
+                        </span>
+                      </li>
+                    )}
+                    {formData.images.map((image, index) => (
+                      <li key={index} className="m-1">
+                        <div className="relative">
+                          <img
+                            src={image}
+                            alt={`file-${index}`}
+                            className="w-32"
+                          />
+                          <button
+                            className="btn btn-xs btn-circle btn-error absolute right-0 top-0"
+                            onClick={() => removeImage(index)}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
           {/* Additional steps for Location and Description */}
           {currentStep === 2 && (
             <div>
@@ -270,17 +300,20 @@ const Form = () => {
               <button
                 type="button"
                 onClick={() => {
-                  handleFileUpload(); 
-                  setCurrentStep(3)
-                }}                
-                className="btn btn-primary">
+                  handleFileUpload();
+                  setCurrentStep(3);
+                }}
+                className="btn btn-primary"
+              >
                 Next
               </button>
             </div>
           )}
           {currentStep === 3 && (
             <div>
-              <h2 className="text-lg font-semibold mb-4">Step 3: Description</h2>
+              <h2 className="text-lg font-semibold mb-4">
+                Step 3: Description
+              </h2>
               <div className="mb-4">
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Description
@@ -296,12 +329,11 @@ const Form = () => {
                 <button
                   type="button"
                   onClick={() => setCurrentStep(2)}
-                  className="btn btn-secondary">
+                  className="btn btn-secondary"
+                >
                   Previous
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary">
+                <button type="submit" className="btn btn-primary">
                   Submit
                 </button>
               </div>
