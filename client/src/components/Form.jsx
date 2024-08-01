@@ -160,19 +160,19 @@ const Form = () => {
       <div className="flex">
         <ul className="steps grow steps-horizontal">
           <li
-            className={`step ${currentStep === 1 ? "step-primary" : ""}`}
+            className={`step ${currentStep === 1 ? "step-primary" : ""} cursor-pointer`}
             onClick={() => setCurrentStep(1)}
           >
             Upload Images
           </li>
           <li
-            className={`step ${currentStep === 2 ? "step-primary" : ""}`}
+            className={`step ${currentStep === 2 ? "step-primary" : ""} cursor-pointer`}
             onClick={() => setCurrentStep(2)}
           >
             Location & Price
           </li>
           <li
-            className={`step ${currentStep === 3 ? "step-primary" : ""}`}
+            className={`step ${currentStep === 3 ? "step-primary" : ""} cursor-pointer`}
             onClick={() => setCurrentStep(3)}
           >
             Description

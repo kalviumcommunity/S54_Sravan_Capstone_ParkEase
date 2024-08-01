@@ -44,7 +44,10 @@ const Home = () => {
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-lg z-50 text-white">
             <h1 className="mb-5 text-2xl md:text-5xl font-bold">WELCOME TO PARKEZ</h1>
-            <p className="mb-5">Your Key to Hastle-Free Parking</p>
+            {/* <p className="mb-5">Your Key to Hastle-Free Parking</p> */}
+            <h1 className="text-xl font-bold text-black mb-6">
+        Your Key to <span className="bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">Hassle-Free</span> Parking
+      </h1>
             <div className="join bg-white rounded-full  w-full max-w-md mb-5">
               <input
                 type="text"

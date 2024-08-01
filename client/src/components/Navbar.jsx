@@ -57,9 +57,6 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Home</a>
-              </li>
-              <li>
                 <a>Explore</a>
               </li>
               <li>
@@ -70,15 +67,12 @@ const Navbar = () => {
           <div className="flex">
             <img src={logo} className="size-12 rounded-lg" alt="" />
           </div>
+          <Link to={"/"}>
           <a className="btn btn-ghost text-xl">PARKEZ</a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-            <li>
-              <Link to={"/"}>
-                  Home
-              </Link>
-            </li>
             <li>
               <Link to={ userInfo ? "/explore" : "/"}>
                   Explore

@@ -41,7 +41,10 @@ const About = () => {
           <div className="md:w-3/4 flex place-content-center z-20">
             <div className="w-[90%] md:w-[60%] m-auto ">
               <h1 className="text-4xl lg:text-6xl font-semibold text-white md:text-black">
-                A marketplace to sell parking spaces
+                A <span className="bg-gradient-to-r from-blue-400 to-blue-200 text-transparent bg-clip-text">
+                     marketplace 
+                    </span>
+                      &nbsp; to sell parking spaces
               </h1>
               <p className="py-12">
                 Parkez is a platform that connects parking space owners with

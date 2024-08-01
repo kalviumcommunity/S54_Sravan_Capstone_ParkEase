@@ -45,16 +45,20 @@ const Explore = () => {
               Start earning money by listing your space / spot in our platform.
             </p>
             <button
-              className="btn btn-outline btn-lg "
+              className="btn btn-outline btn-md text-lg "
               onClick={() => document.getElementById("my_modal_1").showModal()}>
               Get Started
+              <svg class="w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        viewBox="0 0 24 24" className="w-6 h-6 ml-2">
+        <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+    </svg>
             </button>
           </div>
         </div>
       </div>
       <div>
         <PiPlusBold
-          className="bg-white size-12 rounded-full fixed bottom-4 right-8 p-2 z-50 hover:scale-110 hover:bg-gray-100
+          className="bg-white size-12 rounded-full fixed bottom-12 right-28 p-2 z-50 hover:scale-110 hover:bg-gray-100
         hover:cursor-pointer"
           onClick={() => document.getElementById("my_modal_1").showModal()}
         />

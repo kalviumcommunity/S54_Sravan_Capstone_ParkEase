@@ -1,4 +1,5 @@
 const User = require('../schemas/userSchema');
+const ParkingSpace = require('../schemas/SpaceSchema');
 
 // Controller to create a new user only if doesn't exist
 const createUser = async (req, res) => {
@@ -30,19 +31,24 @@ const getUsers = async (req, res) => {
   }
 };
 
-// Controller to get user by email
-const getUserByEmail = async (req, res) => {
+const getUserSpaces = async (req, res) => {
   try {
-    const { email } = req.params;
-    const user = await User.findOne({ email });
+    const clerkUserId = req.params.clerkUserId;
+
+    // Find the user by ID and populate the myspaces array
+    const user = await User.findOne({ clerkUserId }).populate('myspaces');
+
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json(user);
+
+    res.status(200).json(user.myspaces);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch user' });
+    res.status(500).json({ message: 'Server error', error });
   }
 };
+
 
 // Controller to update user by email
 const updateUserByEmail = async (req, res) => {
@@ -75,7 +81,7 @@ const deleteUserByEmail = async (req, res) => {
 module.exports = {
   createUser,
   getUsers,
-  getUserByEmail,
+  getUserSpaces,
   updateUserByEmail,
   deleteUserByEmail,
 };

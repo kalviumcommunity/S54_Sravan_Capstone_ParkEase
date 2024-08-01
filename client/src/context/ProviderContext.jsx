@@ -20,6 +20,7 @@ const ProviderContext = ({ children }) => {
               console.log(latitude , longitude)
               setCoordinates({ longitude: Number(position.coords.longitude),latitude : Number(position.coords.latitude) });
               // we got  latitude and longitude
+              console.log(position);
           }, (error) => {
               console.error("Error getting location:", error.message);
           });

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 const sendEmail = async (to, subject , html) => {
   try {
-    const response = await axios.post('http://localhost:3003/mail/send', {
+    const response = await axios.post('https://parkez-server.vercel.app/mail/send', {
       to,
       subject,
       html
