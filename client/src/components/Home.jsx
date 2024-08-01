@@ -11,6 +11,7 @@ import icon from "../assets/Icon.svg";
 import icon2 from "../assets/Icon2.svg";
 import icon1 from "../assets/Icon3.svg";
 import pin from "../assets/Pin.svg";
+import footerimg from "../assets/logo-footer.png"
 import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../context/ProviderContext";
 const Home = () => {
@@ -42,8 +43,11 @@ const Home = () => {
         <div className="hero-overlay bg-opacity-40"></div>
         <div className="hero-content text-center text-neutral-content">
           <div className="max-w-lg z-50 text-white">
-            <h1 className="mb-5 text-5xl font-bold">WELCOME TO PARKEZ</h1>
-            <p className="mb-5">Your Key to Hastle-Free Parking</p>
+            <h1 className="mb-5 text-2xl md:text-5xl font-bold">WELCOME TO PARKEZ</h1>
+            {/* <p className="mb-5">Your Key to Hastle-Free Parking</p> */}
+            <h1 className="text-xl font-bold text-black mb-6">
+        Your Key to <span className="bg-gradient-to-r from-yellow-400 to-yellow-200 text-transparent bg-clip-text">Hassle-Free</span> Parking
+      </h1>
             <div className="join bg-white rounded-full  w-full max-w-md mb-5">
               <input
                 type="text"
@@ -62,70 +66,78 @@ const Home = () => {
             </div>
             <p className="mb-5">What are you looking for? </p>
             <div className="flex justify-center">
+              <Link to={"/rent"}>
               <div className="text-xs w-32 h-10 glass  m-1 rounded-full items-center size-8 bg-opacity-40 flex p-1">
                 <div className="bg-white text-black p-1 rounded-full mr-2 ">
                   <BiSolidOffer className="size-6" />
                 </div>
                 Offer Spaces
               </div>
+              </Link>
+
+              <Link to={"/explore"}>
               <div className="text-xs w-32 h-10 glass m-1   rounded-full items-center size-8 bg-opacity-40 flex p-1">
                 <div className="bg-white text-black p-1 rounded-full mr-2 ">
                   <FaUsersViewfinder className="size-6" />
                 </div>
                 Find Spaces
               </div>
+              </Link>
+
+              <Link to={"/about"}>
               <div className="text-xs w-32 h-10 glass  m-1  rounded-full items-center size-8 bg-opacity-40 flex p-1">
                 <div className="bg-white text-black p-1 rounded-full mr-2 ">
                   <RiInformation2Line className="size-6" />
                 </div>
                 About US
               </div>
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="hero min-h-screen bg-base-200">
+      <section class="max-w-6xl mx-auto py-20">
+  <div class="text-left mb-10">
+    <p class="text-blue-500 text-sm font-semibold tracking-widest">EASY STEPS</p>
+    <h2 class="text-5xl font-bold">How It Works</h2>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+    <div class="bg-gray-800 p-8 rounded-lg">
+      <h3 class="text-6xl text-blue-500 font-semibold mb-4">1</h3>
+      <h4 class="text-2xl font-semibold mb-2">Register Account</h4>
+      <p class="text-gray-400">Sign up for a free account on Parkez. Provide your basic information to get started and gain access to the platform.</p>
+    </div>
+    <div class="bg-gray-800 p-8 rounded-lg">
+      <h3 class="text-6xl text-blue-500 font-semibold mb-4">2</h3>
+      <h4 class="text-2xl font-semibold mb-2">List or Search for Spaces</h4>
+      <p class="text-gray-400">If you have a parking space to offer, list it on the platform with all the necessary details. If you need a parking spot, use our search feature to find available spaces that suit your needs.</p>
+    </div>
+    <div class="bg-gray-800 p-8 rounded-lg">
+      <h3 class="text-6xl text-blue-500 font-semibold mb-4">3</h3>
+      <h4 class="text-2xl font-semibold mb-2">Book and Manage</h4>
+      <p class="text-gray-400">Easily book a parking space with our secure payment system. Manage your bookings and listings through your dashboard for a seamless experience.</p>
+    </div>
+  </div>
+</section>
+
+
+
+    <div className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
-          <div className="py-32">
-            <h1 className="text-2xl md:text-4xl font-bold">
-              Why You Should Use Parkez
-            </h1>
-            <p className="py-6">
-              Following are the reasons for which you can use parkez.
-            </p>
+          <div className="py-24">
 
-            <div className="md:flex justify-center">
-              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
-                <img src={icon} alt="" className="mx-auto" />
-                <h5 className="text font-bold my-3">Convenience</h5>
-                <p>Easily find and book parking spots , saving your time.</p>
-              </div>
-              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
-                <img src={icon1} alt="" className="mx-auto" />
-                <h5 className="text font-bold my-3">Cost-Effective</h5>
-                <p>Save money with competitive pricing.</p>
-              </div>
-              <div className="w-80 text-center flex-col justify-center my-12 mx-10 md:my-0 md:mx-0">
-                <img src={icon2} alt="" className="mx-auto" />
-                <h5 className="text font-bold my-3">Community Engagement</h5>
-                <p>
-                  Join a community of users who share and rate parking spaces.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-32 text-center">
+            <div className=" text-center">
               <h1 className="text-2xl md:text-4xl font-bold">
                 {" "}
                 Featured Park Spaces
               </h1>
-              <p className="py-6">
+              <p className="py-4">
                 Discover the best spots handpicked for you.{" "}
               </p>
             </div>
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
                 <div className="card card-compact  md:w-96 h-80 bg-base-100 shadow-xl relative">
                   <img
                     src="https://th.bing.com/th/id/R.9236f714e70d6500c4c89d00d4e4c46e?rik=A5itF2b%2fEwYWoA&riu=http%3a%2f%2frealtynxt.com%2fwp-content%2fuploads%2f2017%2f04%2f43.jpg&ehk=kVZfO96vtu%2f2YRSwWQV9JLgoQRQXTcuY5XGFqsDt7kc%3d&risl=&pid=ImgRaw&r=0"
@@ -295,7 +307,7 @@ const Home = () => {
                 </div>
               </div>
               <Link to={"/explore"}>
-                <button className="btn btn-primary my-8">See All Spaces</button>
+                <button className="btn bg-blue-500 hover:bg-blue-700 text-white my-8">See All Spaces</button>
               </Link>
             </div>
           </div>
@@ -359,11 +371,16 @@ const Home = () => {
       </div>
 
       {/* Footer  */}
-      <div className="px-2 md:px-32 my-28 bg-black">
+      <div className="px-2 md:px-32 mt-28 bg-black">
         <footer className="footer items-center p-4 bg-inherit text-white ">
           <aside className="items-center grid-flow-col">
+          <img className="size-28" src={footerimg} alt="" />
+          <div className="flex flex-col">
+            <p className="font-semibold text-xl text-white">PARKEZ</p>
             <p>Copyright © 2024 - All right reserved</p>
+          </div>
           </aside>
+          <div className="flex font-bold text-xl">
           <svg
             width="36"
             height="36"
@@ -372,10 +389,14 @@ const Home = () => {
             fillRule="evenodd"
             clipRule="evenodd"
             className="fill-current"
-          >
+            >
             <path d="M22.672 15.226l-2.432.811.841 2.515c.33 1.019-.209 2.127-1.23 2.456-1.15.325-2.148-.321-2.463-1.226l-.84-2.518-5.013 1.677.84 2.517c.391 1.203-.434 2.542-1.831 2.542-.88 0-1.601-.564-1.86-1.314l-.842-2.516-2.431.809c-1.135.328-2.145-.317-2.463-1.229-.329-1.018.211-2.127 1.231-2.456l2.432-.809-1.621-4.823-2.432.808c-1.355.384-2.558-.59-2.558-1.839 0-.817.509-1.582 1.327-1.846l2.433-.809-.842-2.515c-.33-1.02.211-2.129 1.232-2.458 1.02-.329 2.13.209 2.461 1.229l.842 2.515 5.011-1.677-.839-2.517c-.403-1.238.484-2.553 1.843-2.553.819 0 1.585.509 1.85 1.326l.841 2.517 2.431-.81c1.02-.33 2.131.211 2.461 1.229.332 1.018-.21 2.126-1.23 2.456l-2.433.809 1.622 4.823 2.433-.809c1.242-.401 2.557.484 2.557 1.838 0 .819-.51 1.583-1.328 1.847m-8.992-6.428l-5.01 1.675 1.619 4.828 5.011-1.674-1.62-4.829z"></path>
           </svg>
-          {/* <p>PARKEZ</p> */}
+          <a href="mailto:parkez904@gmail.com" className="hover:underline hover:underline-offset-4">
+            <p>parkez904@gmail.com</p>
+            </a>
+            </div>
+        
           <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
             <a
               href="https://www.instagram.com/sravan.reddy.1612147?igsh=MTcxcDdpMm1qejY4dg=="

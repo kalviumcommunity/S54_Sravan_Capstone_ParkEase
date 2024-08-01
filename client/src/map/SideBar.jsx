@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import SkeletonLoader from "./SkeletonLoader.jsx";
+import sendEmail from "../utils/emailService.js";
+
 
 const SideBar = ({ data, onFocusMarker , loading }) => {
   const [selectedDiv, setSelectedDiv] = useState(null);
@@ -18,6 +20,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
   const [toDate, setToDate] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
   const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const { userInfo } = useContext(AppContext)
 
   useEffect(() => {
     // Simulate data loading
@@ -88,30 +91,16 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
   }, [fromDate, toDate]);
 
   const handlePayment = async (event) => {
-    if (
-      window.confirm(
-        `The total cost is ₹${totalCost.toFixed(
-          2
-        )}. Do you want to proceed to payment?`
-      )
-    ) {
+    if (window.confirm(`The total cost is ₹${totalCost.toFixed(2)}. Do you want to proceed to payment?`)) {
       const amount = Math.round(totalCost * 100);
       const currency = "INR";
       const receiptId = "1234567890";
-
+  
       try {
         const order = await axios.post(
           "https://parkez-server.vercel.app/payment/order",
-          {
-            amount,
-            currency,
-            receipt: receiptId,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          { amount, currency, receipt: receiptId },
+          { headers: { "Content-Type": "application/json" } }
         );
         console.log("order order ", order.data);
         const options = {
@@ -129,18 +118,32 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
               const validateResponse = await axios.post(
                 "https://parkez-server.vercel.app/payment/validate",
                 JSON.stringify(body),
-                {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
+                { headers: { "Content-Type": "application/json" } }
               );
-
+  
               const jsonResponse = validateResponse.data;
               console.log("jsonResponse", jsonResponse);
               toast.success("Payment Successful: " + jsonResponse.paymentId, {
                 position: "top-center"
               });
+  
+              // Sending email after successful payment
+              const to = userInfo.primaryEmailAddress.emailAddress;
+              const subject = "Booking Confirmation";
+              const html = `
+                <h1>Parkez</h1>
+                <h2>Booking Confirmation</h2>
+                <p>Dear ${userInfo.username},</p>
+                <p>Your payment of ₹${totalCost.toFixed(2)} for the booking at ${selectedDiv.owner.name} has been successful.</p>
+                <p>Booking Details:</p>
+                <ul>
+                  <li>Location: ${selectedDiv.location.address}</li>
+                  <li>Price: ${selectedDiv.price.hourly} INR/hour</li>
+                  <li>Features: ${selectedDiv.features.join(', ')}</li>
+                </ul>
+                <p>Thank you for using Parkez!</p>`;
+              await sendEmail(to, subject, html);
+  
             } catch (error) {
               console.error("Error validating response:", error);
               toast.error("Payment Validation Failed", {
@@ -170,7 +173,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
             position: "top-center"
           });
         });
-
+  
         closeModal();
         rzp1.open();
         event.preventDefault();
@@ -330,7 +333,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
                 <div className="absolute bottom-7 left-12 flex items-center">
                   <div className="avatar online">
                     <div className="w-10 rounded-full">
-                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                      <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>
                   </div>
                   <p className="pl-2 text-sm font-medium">Listed 12 days ago</p>
