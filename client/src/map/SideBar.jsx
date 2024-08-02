@@ -19,7 +19,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [isLoading, setIsLoading] = useState(true); //  loading state
   const { userInfo } = useContext(AppContext)
 
   useEffect(() => {
@@ -140,12 +140,26 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
                   <li>Location: ${selectedDiv.location.address}</li>
                   <li>Price: ${selectedDiv.price.hourly} INR/hour</li>
                   <li>Features: ${selectedDiv.features.join(', ')}</li>
+                  <li>Duration: ${Math.abs(toDate - fromDate) / 36e5} hours</li>
                 </ul>
                 <p>Thank you for using Parkez!</p>`;
               await sendEmail(to, subject, html);
   
+              // Create booking
+              await axios.post(
+                "https://parkez-server.vercel.app/users/booking",
+                {
+                  clerkUserId: userInfo.id,
+                  parkingSpaceId: selectedDiv._id,
+                  duration : Math.abs(toDate - fromDate) / 36e5,
+                  amount: totalCost,
+                  paymentId: jsonResponse.paymentId
+                },
+                { headers: { "Content-Type": "application/json" } }
+              );
+  
             } catch (error) {
-              console.error("Error validating response:", error);
+              console.error("Error validating response or creating booking:", error);
               toast.error("Payment Validation Failed", {
                 position: "top-center"
               });
@@ -185,6 +199,7 @@ const SideBar = ({ data, onFocusMarker , loading }) => {
       }
     }
   };
+  
 
   return (
     <div>
