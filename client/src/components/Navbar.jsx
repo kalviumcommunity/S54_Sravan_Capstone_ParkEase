@@ -68,7 +68,7 @@ const Navbar = () => {
             <img src={logo} className="size-12 rounded-lg" alt="" />
           </div>
           <Link to={"/"}>
-          <a className="btn btn-ghost text-xl">PARKEZ</a>
+          <p className="btn btn-ghost text-xl">PARKEZ</p>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">

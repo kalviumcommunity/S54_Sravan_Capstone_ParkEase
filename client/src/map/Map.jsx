@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent } from 'react-leaflet';
 import { AppContext } from '../context/ProviderContext';
 import { myIcon } from './Icon';
-import locations from './locations';
 import axios from 'axios';
 import SideBar from './SideBar';
 
@@ -73,8 +72,8 @@ const Map = () => {
       <SideBar data={spacesData} onFocusMarker={onFocusMarker} loading={loading} />
       <MapContainer
         className='z-10 w-3/4'
-        center={{ lat: 51.505, lng: -0.09 }}
-        zoom={13}
+        center={{ lat: 23.25, lng: 77.41 }}
+        zoom={13} closePopupOnClick={false}  minZoom={6} 
         scrollWheelZoom={true}
         whenCreated={(mapInstance) => {
           console.log('Map created:', mapInstance);
@@ -86,15 +85,6 @@ const Map = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <LocationMarker />
-        {locations.map(item => (
-          <Marker key={item.title} position={[item.lat, item.lng]}>
-            {item.title && (
-              <Popup>
-                <span>{item.title}</span>
-              </Popup>
-            )}
-          </Marker>
-        ))}
         {spacesData.map(elem => (
           <Marker key={elem._id} position={[elem.location.latitude, elem.location.longitude]}>
             {elem.location.address && (

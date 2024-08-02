@@ -38,7 +38,3 @@ body {
 .cl-internal-180wb59 {
   display: none;
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

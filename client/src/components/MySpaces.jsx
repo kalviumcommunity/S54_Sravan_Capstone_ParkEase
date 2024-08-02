@@ -6,6 +6,8 @@ const MySpaces = () => {
   const { userInfo } = useContext(AppContext);
   const clerkUserId = userInfo?.id;
   const [spaces, setSpaces] = useState([]);
+  const [bookedSpaces, setBookedSpaces] = useState([]);
+  const [activeTab, setActiveTab] = useState("created");
 
   useEffect(() => {
     const fetchSpaces = async () => {
@@ -19,8 +21,27 @@ const MySpaces = () => {
       }
     };
 
-    fetchSpaces();
-  }, [clerkUserId]);
+    if (activeTab === "created") {
+      fetchSpaces();
+    }
+  }, [clerkUserId, activeTab]);
+
+  useEffect(() => {
+    const fetchBookedSpaces = async () => {
+      try {
+        const response = await axios.get(
+          `https://parkez-server.vercel.app/users/${clerkUserId}/booked-spaces`
+        );
+        setBookedSpaces(response.data);
+      } catch (error) {
+        console.error("Error fetching booked spaces:", error);
+      }
+    };
+
+    if (activeTab === "booked") {
+      fetchBookedSpaces();
+    }
+  }, [ activeTab]);
 
   return (
     <div>
@@ -34,8 +55,8 @@ const MySpaces = () => {
               <button
                 role="tab"
                 type="button"
-                className="flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset text-blue-500 shadow bg-white dark:text-white dark:bg-blue-500"
-                aria-selected=""
+                className={`flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset ${activeTab === "created" ? "text-blue-500 shadow bg-white dark:text-white dark:bg-blue-500" : "hover:text-gray-800 focus:text-blue-500 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400"}`}
+                onClick={() => setActiveTab("created")}
               >
                 Created
               </button>
@@ -43,7 +64,8 @@ const MySpaces = () => {
               <button
                 role="tab"
                 type="button"
-                className="flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset hover:text-gray-800 focus:text-blue-500 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400"
+                className={`flex whitespace-nowrap items-center h-8 px-5 font-medium rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset ${activeTab === "booked" ? "text-blue-500 shadow bg-white dark:text-white dark:bg-blue-500" : "hover:text-gray-800 focus:text-blue-500 dark:text-gray-400 dark:hover:text-gray-300 dark:focus:text-gray-400"}`}
+                onClick={() => setActiveTab("booked")}
               >
                 Booked
               </button>
@@ -51,7 +73,7 @@ const MySpaces = () => {
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {spaces.length > 0 &&
+          {activeTab === "created" && spaces.length > 0 &&
             spaces.map((space) => (
               <div
                 key={space._id}
@@ -82,27 +104,44 @@ const MySpaces = () => {
                 </div>
               </div>
             ))}
-          <div class="bg-white rounded-lg shadow-md p-4">
-            <img
-              src="https://placehold.co/300x200"
-              alt="Parking Space Thumbnail"
-              class="rounded-lg mb-4"
-            />
-            <h3 class="text-xl font-bold mb-2">Park Inn</h3>
-            <p class="text-gray-700 mb-2">Nakodar Road, Jalandhar, Punjab</p>
-            <p class="text-gray-700 mb-2">70 INR/hour</p>
-            <div class="flex justify-between items-center">
-              <p class="text-gray-700">Upcoming</p>
-              <div class="flex space-x-2">
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                  Cancel Booking
-                </button>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  View Details
-                </button>
-              </div>
-            </div>
-          </div>
+         {activeTab === "booked" && bookedSpaces.length > 0 &&
+  bookedSpaces.map((booking) => {
+    // Calculate the duration in hours and round it
+    const durationInHours = Math.round(booking.duration / 60); // assuming duration is in minutes
+
+    // Format the createdAt date
+    const formattedCreatedAt = new Date(booking.createdAt).toLocaleString();
+
+    return (
+      <div
+        key={booking._id}
+        className="bg-white rounded-lg shadow-md p-4"
+      >
+        <img
+          src={booking.parkingSpace.images[0]}
+          alt="Parking Space Thumbnail"
+          className="rounded-lg mb-4 h-52"
+        />
+        <h3 className="text-xl font-bold mb-2">
+          {booking.parkingSpace.owner.name}
+        </h3>
+        <p className="text-gray-700 mb-2">{booking.parkingSpace.location.address}</p>
+        <p className="text-gray-700 mb-2">
+  Duration: {Math.ceil(booking.duration)} hour{Math.ceil(booking.duration) !== 1 ? 's' : ''}
+</p>
+
+        <div className="flex justify-between">
+        <p className="text-gray-700 mb-2">
+          Booked At: {formattedCreatedAt} 
+        </p>
+        <p className="text-red-700 mb-2">
+           Paid: ₹{Math.round(booking.amountPaid)}
+        </p>
+        </div>
+      </div>
+    );
+  })}
+
         </div>
       </div>
     </div>

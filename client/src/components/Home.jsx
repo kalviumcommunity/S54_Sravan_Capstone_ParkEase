@@ -97,26 +97,26 @@ const Home = () => {
         </div>
       </div>
 
-      <section class="max-w-6xl mx-auto py-20">
-  <div class="text-left mb-10">
-    <p class="text-blue-500 text-sm font-semibold tracking-widest">EASY STEPS</p>
-    <h2 class="text-5xl font-bold">How It Works</h2>
+      <section className="max-w-6xl mx-auto py-20">
+  <div className="text-left mb-10">
+    <p className="text-blue-500 text-sm font-semibold tracking-widest">EASY STEPS</p>
+    <h2 className="text-5xl font-bold">How It Works</h2>
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
-    <div class="bg-gray-800 p-8 rounded-lg">
-      <h3 class="text-6xl text-blue-500 font-semibold mb-4">1</h3>
-      <h4 class="text-2xl font-semibold mb-2">Register Account</h4>
-      <p class="text-gray-400">Sign up for a free account on Parkez. Provide your basic information to get started and gain access to the platform.</p>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">
+    <div className="bg-gray-800 p-8 rounded-lg">
+      <h3 className="text-6xl text-blue-500 font-semibold mb-4">1</h3>
+      <h4 className="text-2xl font-semibold mb-2">Register Account</h4>
+      <p className="text-gray-400">Sign up for a free account on Parkez. Provide your basic information to get started and gain access to the platform.</p>
     </div>
-    <div class="bg-gray-800 p-8 rounded-lg">
-      <h3 class="text-6xl text-blue-500 font-semibold mb-4">2</h3>
-      <h4 class="text-2xl font-semibold mb-2">List or Search for Spaces</h4>
-      <p class="text-gray-400">If you have a parking space to offer, list it on the platform with all the necessary details. If you need a parking spot, use our search feature to find available spaces that suit your needs.</p>
+    <div className="bg-gray-800 p-8 rounded-lg">
+      <h3 className="text-6xl text-blue-500 font-semibold mb-4">2</h3>
+      <h4 className="text-2xl font-semibold mb-2">List or Search for Spaces</h4>
+      <p className="text-gray-400">If you have a parking space to offer, list it on the platform with all the necessary details. If you need a parking spot, use our search feature to find available spaces that suit your needs.</p>
     </div>
-    <div class="bg-gray-800 p-8 rounded-lg">
-      <h3 class="text-6xl text-blue-500 font-semibold mb-4">3</h3>
-      <h4 class="text-2xl font-semibold mb-2">Book and Manage</h4>
-      <p class="text-gray-400">Easily book a parking space with our secure payment system. Manage your bookings and listings through your dashboard for a seamless experience.</p>
+    <div className="bg-gray-800 p-8 rounded-lg">
+      <h3 className="text-6xl text-blue-500 font-semibold mb-4">3</h3>
+      <h4 className="text-2xl font-semibold mb-2">Book and Manage</h4>
+      <p className="text-gray-400">Easily book a parking space with our secure payment system. Manage your bookings and listings through your dashboard for a seamless experience.</p>
     </div>
   </div>
 </section>

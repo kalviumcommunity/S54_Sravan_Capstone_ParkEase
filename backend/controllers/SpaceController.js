@@ -1,6 +1,6 @@
 const ParkingSpace = require('../schemas/SpaceSchema');
 const User = require('../schemas/userSchema'); // Assuming the file is named UserSchema.js
-
+const Booking = require("../schemas/bookingSchema")
 const createSpace = async (req, res) => {
   try {
     const { location, availability, capacity, price, features, owner, rating, reviews, images, ownerId } = req.body;
@@ -86,4 +86,31 @@ const updateSpace = async (req, res) => {
   }
 };
 
-module.exports = { getSpace, getAllSpaces, createSpace, updateSpace };
+
+const getBookedSpaces = async (req, res) => {
+  const { clerkUserId } = req.params;
+
+  try {
+    // Find all bookings with the given clerkUserId
+    const bookings = await Booking.find({ user: clerkUserId }).populate('parkingSpace');
+
+    if (bookings.length === 0) {
+      return res.status(404).json({ message: "No bookings found for this user" });
+    }
+
+    // Extract the relevant information from bookings
+    const bookedSpaces = bookings.map((booking) => ({
+      parkingSpace: booking.parkingSpace,
+      duration: booking.duration, // Use duration if you need it
+      amountPaid: booking.amount,
+      createdAt: booking.createdAt // Include the creation date
+    }));
+
+    res.status(200).json(bookedSpaces);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
+
+
+module.exports = { getSpace, getAllSpaces,getBookedSpaces, createSpace, updateSpace };

@@ -1,5 +1,6 @@
 const User = require('../schemas/userSchema');
 const ParkingSpace = require('../schemas/SpaceSchema');
+const Booking = require("../schemas/bookingSchema");
 
 // Controller to create a new user only if doesn't exist
 const createUser = async (req, res) => {
@@ -49,20 +50,39 @@ const getUserSpaces = async (req, res) => {
   }
 };
 
+const createBooking = async (req, res) => {
+  const { clerkUserId, parkingSpaceId, duration, amount, paymentId } = req.body;
 
-// Controller to update user by email
-const updateUserByEmail = async (req, res) => {
   try {
-    const { email } = req.params;
-    const updatedUser = await User.findOneAndUpdate({ email }, req.body, { new: true });
-    if (!updatedUser) {
-      return res.status(404).json({ message: 'User not found' });
+    // Create a new booking
+    const booking = new Booking({
+      user: clerkUserId,  // Save clerkUserId directly
+      parkingSpace: parkingSpaceId,
+      duration,
+      amount,
+      paymentId
+    });
+
+    await booking.save();
+
+    // Find the user by clerkUserId and update their bookings
+    const user = await User.findOne({ clerkUserId });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).json(updatedUser);
+
+    // Update the user's bookings
+    user.mybookings.push(booking._id);
+    await user.save();
+
+    res.status(201).json(booking);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to update user' });
+    console.error("Error creating booking:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
 
 // Controller to delete user by email
 const deleteUserByEmail = async (req, res) => {
@@ -80,8 +100,8 @@ const deleteUserByEmail = async (req, res) => {
 
 module.exports = {
   createUser,
+  createBooking,
   getUsers,
   getUserSpaces,
-  updateUserByEmail,
   deleteUserByEmail,
 };
